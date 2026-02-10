@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>L Çalışması Diksiyon Aracı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    .app {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 14px 56px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    p {
+      margin: 4px 0 8px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+      padding: 16px 14px;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.8);
+    }
+    .card h3 {
+      font-size: 17px;
+      margin: 0 0 8px;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: #111827;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+    .label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+    }
+    .label-dot-warm {
+      background: #f97316;
+    }
+    .label-dot-cool {
+      background: #38bdf8;
+    }
+    .label-dot-mix {
+      background: linear-gradient(120deg,#f97316,#38bdf8);
+    }
+    .stretch-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+    }
+    .stretch-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .stretch-name {
+      color: #e5e7eb;
+    }
+    .stretch-time {
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+    .timer-display {
+      font-size: 26px;
+      letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+    }
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    button.secondary {
+      background: #111827;
+      color: #9ca3af;
+      border: 1px solid #1f2937;
+    }
+    button.small {
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 10px 11px;
+      font-size: 14px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    textarea:focus {
+      outline: 2px solid #1d4ed8;
+      outline-offset: 0;
+    }
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .sample-select {
+      flex: 1;
+      min-width: 160px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 6px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .chip {
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #9ca3af;
+    }
+    .text-output {
+      margin-top: 8px;
+      padding: 10px 11px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      min-height: 120px;
+      font-size: 14px;
+      line-height: 1.6;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+    .meta-output {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #9ca3af;
+      white-space: pre-wrap;
+    }
+    .l-thick {
+      color: #f97316;
+      font-weight: 600;
+    }
+    .l-thin {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    .reading-plan {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .day-card {
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      padding: 8px 9px;
+      background: #020617;
+    }
+    .day-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .day-meta {
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .day-task {
+      margin-left: 10px;
+      list-style: disc;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 2px 6px;
+      background: #111827;
+      color: #9ca3af;
+    }
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+    .plan-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .plan-helper {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+    .studio-header {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid #1e293b;
+      background: #020617;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .studio-header-main {
+      flex: 1;
+      min-width: 0;
+    }
+    .studio-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .studio-title {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #9ca3af;
+    }
+    .studio-main {
+      margin-top: 8px;
+    }
+    .card-plan {
+      display: none;
+    }
+    @media (max-width: 640px) {
+      .studio-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .studio-header-row {
+        width: 100%;
+      }
+      .timer-controls {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>L Çalışması Diksiyon Aracı</h1>
+    <p>Isın, metni oku, L’leri renklendir ve kelimenin kökenini duy.</p>
+
+    <div class="studio-header">
+      <div class="studio-header-main">
+        <div class="label">
+          <span class="label-dot label-dot-warm"></span>
+          <span>Isınma serisi</span>
+        </div>
+        <div class="studio-header-row">
+          <div class="timer-display" id="timerDisplay">00:00</div>
+          <p class="plan-helper" id="timerHint">Isınma serisi için hazır.</p>
+        </div>
+      </div>
+      <div class="timer-controls">
+        <button id="startTimer">Başlat</button>
+        <button id="pauseTimer" class="secondary">Duraklat</button>
+        <button id="resetTimer" class="secondary">Sıfırla</button>
+        <button id="add30" class="small secondary">+30 sn</button>
+      </div>
+    </div>
+
+    <div class="card studio-main">
+        <div class="label">
+          <span class="label-dot label-dot-cool"></span>
+          <span>L analizi</span>
+        </div>
+        <h3>Kalın / ince L bulma aracı</h3>
+        <p>Metni yapıştır, kalın ve ince L’leri renklendirilmiş gör.</p>
+        <div class="input-row">
+          <select id="sampleSelect" class="sample-select">
+            <option value="">Örnek cümle seç</option>
+            <option value="kalin1">Kalın L – 1</option>
+            <option value="kalin2">Kalın L – 2</option>
+            <option value="kalin3">Kalın L – 3</option>
+            <option value="kalin4">Kalın L – 4</option>
+            <option value="kalin5">Kalın L – 5</option>
+            <option value="kalin6">Kalın L – 6</option>
+            <option value="ince1">İnce L – 1</option>
+            <option value="ince2">İnce L – 2</option>
+            <option value="ince3">İnce L – 3</option>
+            <option value="ince4">İnce L – 4</option>
+            <option value="ince5">İnce L – 5</option>
+            <option value="ince6">İnce L – 6</option>
+            <option value="karisik1">Kalın + ince L – 1</option>
+            <option value="karisik2">Kalın + ince L – 2</option>
+            <option value="karisik3">Kalın + ince L – 3</option>
+            <option value="karisik4">Kalın + ince L – 4</option>
+            <option value="karisik5">Kalın + ince L – 5</option>
+            <option value="karisik6">Kalın + ince L – 6</option>
+          </select>
+          <button id="analyzeButton">Analiz et</button>
+        </div>
+        <textarea id="textInput" placeholder="Metni buraya yaz veya yapıştır. Örneğin: Lale ela gözleri bela Leyla kadar meyyaldi..."></textarea>
+        <div class="legend">
+          <div class="legend-item">
+            <span class="label-dot label-dot-warm"></span>
+            <span>Kalın L</span>
+          </div>
+          <div class="legend-item">
+            <span class="label-dot label-dot-cool"></span>
+            <span>İnce L</span>
+          </div>
+          <span class="chip">Kural: a ı o u → çoğunlukla kalın, e i ö ü → çoğunlukla ince</span>
+        </div>
+        <div style="margin:6px 0 4px;">
+          <input id="thinLexiconInput" type="text" style="width:100%;box-sizing:border-box;border-radius:999px;border:1px solid #1f2937;background:#020617;color:#e5e7eb;padding:6px 10px;font-size:12px;"
+                 placeholder="İnce L zorunlu kelimeler (virgülle ayır: bela, ela, meyyal, Leyla, lakin, Alaaddin...)">
+          <div style="font-size:11px;color:#9ca3af;margin-top:3px;">
+            Bu listedeki kelimelerin tüm L’leri sözlük gibi <strong>ince</strong> kabul edilir.
+          </div>
+        </div>
+        <div class="text-output" id="textOutput"></div>
+        <div class="meta-output" id="metaOutput"></div>
+      </div>
+
+    <div class="card card-plan" style="margin-top:24px;">
+      <div class="label">
+        <span class="label-dot label-dot-mix"></span>
+        <span>Haftalık program</span>
+      </div>
+      <div class="plan-header">
+        <h3>1 haftalık yoğun okuma planı</h3>
+        <span class="badge">
+          <span class="badge-dot"></span>
+          <span>Küçük Ağa / Ateşten Gömlek</span>
+        </span>
+      </div>
+      <p class="plan-helper">Her gün: ısınma → L çalışması → kitaptan okuma → kısa kayıt değerlendirmesi.</p>
+      <div class="reading-plan">
+        <div class="day-card">
+          <div class="day-title">Pazartesi</div>
+          <div class="day-meta">Odak: Temel L heceleri</div>
+          <ul>
+            <li class="day-task">5–10 dk ısınma.</li>
+            <li class="day-task">la–le–li–lo–lu, lâ serileri 20 tekrar.</li>
+            <li class="day-task">Küçük Ağa’dan 1–2 sayfa yavaş okuma.</li>
+            <li class="day-task">2–3 dk kayıt, L’leri dinle.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-title">Salı</div>
+          <div class="day-meta">Odak: Kalın L metinleri</div>
+          <ul>
+            <li class="day-task">Isınma + kalın L cümleleri (1–6) çalış.</li>
+            <li class="day-task">Her cümleyi önce yavaş, sonra ritimli oku.</li>
+            <li class="day-task">Ateşten Gömlek’ten 1–2 sayfa.</li>
+            <li class="day-task">Kayıtta sadece kalın L netliğine odaklan.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-title">Çarşamba</div>
+          <div class="day-meta">Odak: İnce L metinleri</div>
+          <ul>
+            <li class="day-task">Isınma sonrası ince L cümleleri (1–6).</li>
+            <li class="day-task">Leyla, meyyal, Kemal, kelam, lakin üzerinde dur.</li>
+            <li class="day-task">Seçtiğin eserden L yoğun paragraf oku.</li>
+            <li class="day-task">Aynı paragrafı iki kez kaydedip karşılaştır.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-title">Perşembe</div>
+          <div class="day-meta">Odak: Hız ve netlik</div>
+          <ul>
+            <li class="day-task">Isınma süresini biraz uzat.</li>
+            <li class="day-task">Daha önce çalıştığın metni bir seviye hızlı oku.</li>
+            <li class="day-task">L netliği bozulduğu noktayı fark etmeye çalış.</li>
+            <li class="day-task">Kısa hız denemeleri kaydı al.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-title">Cuma</div>
+          <div class="day-meta">Odak: Kalın + ince L karışık</div>
+          <ul>
+            <li class="day-task">Karışık L cümleleri (1–6) üzerinde çalış.</li>
+            <li class="day-task">Her L için zihinden kalın/ince etiketi koy.</li>
+            <li class="day-task">Kitaptan yeni bölüm oku.</li>
+            <li class="day-task">Hafta başındaki kayıtla bugünü karşılaştır.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-title">Cumartesi</div>
+          <div class="day-meta">Odak: Uzun okuma</div>
+          <ul>
+            <li class="day-task">Isınma + sevdiğin L yoğun metin.</li>
+            <li class="day-task">5–10 dk kesintisiz okuma yap.</li>
+            <li class="day-task">Bir bölümünü kaydedip nefes–tempo–L dengesine bak.</li>
+          </ul>
+        </div>
+        <div class="day-card">
+          <div class="day-title">Pazar</div>
+          <div class="day-meta">Odak: Hafif tekrar</div>
+          <ul>
+            <li class="day-task">Kısa ısınma ve rahat tempo okuma.</li>
+            <li class="day-task">Hafta içi zorlandığın cümleleri tekrar et.</li>
+            <li class="day-task">Genel bir kayıt alıp gelişimi dinle.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const lSamples = {
+      kalin1: "Baltalı kolağası lalapaşanın halılarına halasının boi pantolonlu palabıyıklı balcıbaşısına Balgat'la Bağdat'ta palan döktürdü.",
+      kalin2: "Alan alır kalan kalır daralan bollaşır.",
+      kalin3: "Yalancı yalama dolambaçı yollardan darala darala Allah Allah diyerek kalabalık alana daldı.",
+      kalin4: "Falancanın halası onikiye on kala börekle balla taçlı haçlının ve dahi yalancı dolandırıcının allı pullu karanlığına baltayla dalmış.",
+      kalin5: "Folluk Allah'tan dolu da dolu dolu dolamacının bol bol Bolu'lu kalabalık ağzından dolandırıcının sesi \"fol yok yol yok\" demedi.",
+      kalin6: "Aralık doğumlu kolcunun falafel baltalayan Oflu ablası çok ağladı.",
+      ince1: "Lay lay lom lay lay lom.",
+      ince2: "Lord layık olduğunca eyyamcı Lale'nin Leyla'nın labadasını lamba ışığında yemesini istemedi.",
+      ince3: "Alaaddin Lamba'nın Cini'ne lambada mısın yoksa balistikçi palyaçonun yanında mısın dedi.",
+      ince4: "Lafazan Lale Laleli'de laleci Leyla'yla laf ederken Laleli'nin laleleri lay lay diyerek Lafazan Lale'nin yarine gittiler.",
+      ince5: "Lale ela gözleri bela Leyla kadar meyyaldi aşk-ı belaya lakin Leyla ela ela bakınca Lale sümbül layığınca kelam edemedi Kemal'in gülcemaline.",
+      ince6: "Labada lordu Letafet Bey şikayet eder Leydi Lafayet'ten lakin lahmacun lemur için bela leblebiler lafebesi laylaylom ederken lağımcıya iletilmiştir.",
+      karisik1: "Belalı kalafatçı Kalafatı lamba yarıcılara çekti.",
+      karisik2: "Dolandırıcının Yalan dolu bakışları hala laflamakta olan halayıkla lord'da idi.",
+      karisik3: "Lağımcı Züleyha'ya zalim dedi ama layık olduğu gibi palabıyıklı palalı belalı palacıbaşılardan lafla lambalamanın mümkün olmadığını anladı.",
+      karisik4: "Lale baloncu Kalın Mustafa'yla beraber hala halasının halılarını yolcu lambalarına asıyor,",
+      karisik5: "Labadalar altın elmaların altında kalırsa laflamaya meyyal eyyamcı baka ağlar.",
+      karisik6: "Bolayır'ı Latife falancanın kalburunda lakin filancanın dolmaları Latife'yi bağladı."
+    };
+
+    const API_BASE =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === ""
+        ? "http://localhost:3000"
+        : "https://YOUR-CLOUDFLARE-WORKER-SUBDOMAIN.workers.dev";
+
+    const textInput = document.getElementById("textInput");
+    const textOutput = document.getElementById("textOutput");
+    const metaOutput = document.getElementById("metaOutput");
+    const analyzeButton = document.getElementById("analyzeButton");
+    const sampleSelect = document.getElementById("sampleSelect");
+    const thinLexiconInput = document.getElementById("thinLexiconInput");
+
+    const defaultThinWords = [
+      "bela",
+      "belâ",
+      "ela",
+      "elâ",
+      "meyyal",
+      "leyla",
+      "leylâ",
+      "kemal",
+      "kemâl",
+      "kelam",
+      "kelâm",
+      "lakin",
+      "lâkin",
+      "alaaddin"
+    ];
+
+    let thinLexicon = new Set(defaultThinWords);
+
+    function rebuildThinLexicon() {
+      thinLexicon = new Set(defaultThinWords);
+      const extra = (thinLexiconInput.value || "").split(",");
+      for (const raw of extra) {
+        const w = raw.trim().toLowerCase();
+        if (w) thinLexicon.add(w);
+      }
+    }
+
+    const wordMeta = new Map();
+    const pendingLookups = new Set();
+
+    async function lookupWord(word) {
+      if (!word) return;
+      if (pendingLookups.has(word) || wordMeta.has(word)) return;
+      pendingLookups.add(word);
+      try {
+        const res = await fetch(API_BASE + "/api/sozluk?q=" + encodeURIComponent(word));
+        if (res.ok) {
+          const data = await res.json();
+          wordMeta.set(word, data);
+        }
+      } catch (e) {
+      } finally {
+        pendingLookups.delete(word);
+        renderAnalysis();
+      }
+    }
+
+    function updateDictionaryForText(text) {
+      const tokens = text.match(/[^\s.,!?;:"'()\-]+/g) || [];
+      for (const token of tokens) {
+        if (!/[lL]/.test(token)) continue;
+        const w = token.toLowerCase();
+        if (wordMeta.has(w) || pendingLookups.has(w)) continue;
+        lookupWord(w);
+      }
+    }
+
+    sampleSelect.addEventListener("change", function () {
+      const key = sampleSelect.value;
+      if (key && lSamples[key]) {
+        textInput.value = lSamples[key];
+        textOutput.innerHTML = "";
+      }
+    });
+
+    thinLexiconInput.addEventListener("input", function () {
+      rebuildThinLexicon();
+    });
+
+    function reduceForRootLookup(w) {
+      const suffixes = [
+        "di",
+        "dı",
+        "du",
+        "dü",
+        "ti",
+        "tı",
+        "tu",
+        "tü",
+        "ya",
+        "ye"
+      ];
+      for (let i = 0; i < suffixes.length; i++) {
+        const suf = suffixes[i];
+        if (w.endsWith(suf) && w.length > suf.length + 1) {
+          return w.slice(0, w.length - suf.length);
+        }
+      }
+      return null;
+    }
+
+    function classifyL(before, after, isWordStart, word, indexInWord) {
+      const vowelsThick = "aıouAIOUâÂ";
+      const vowelsThin = "eiöüEİÖÜ";
+      if (word) {
+        const w = word.toLowerCase();
+        if (thinLexicon.has(w)) {
+          return "thin";
+        }
+        let root = reduceForRootLookup(w);
+        if (root && thinLexicon.has(root)) {
+          return "thin";
+        }
+        let meta = wordMeta.get(w);
+        if (!meta && root) {
+          meta = wordMeta.get(root);
+        }
+        if (meta) {
+          const lisan = meta.madde_lisan || "";
+          if (meta.thinBySpelling) {
+            return "thin";
+          }
+          if (lisan.startsWith("Arapça") || lisan.startsWith("Farsça")) {
+            return "thin";
+          }
+          if (lisan.startsWith("Rumca") && isWordStart) {
+            return "thin";
+          }
+        }
+      }
+      if (isWordStart) return "thin";
+      if (after && vowelsThick.includes(after)) {
+        return "thick";
+      }
+      if (after && vowelsThin.includes(after)) {
+        return "thin";
+      }
+      if (before && vowelsThick.includes(before)) {
+        return "thick";
+      }
+      if (before && vowelsThin.includes(before)) {
+        return "thin";
+      }
+      return "thin";
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function speakWord(word) {
+      if (!window.speechSynthesis || !word) return;
+      const u = new SpeechSynthesisUtterance(word);
+      u.lang = "tr-TR";
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+
+    function renderAnalysis() {
+      const raw = textInput.value || "";
+      let result = "";
+      const seenWords = new Set();
+      const metaLines = [];
+      for (let i = 0; i < raw.length; i++) {
+        const ch = raw[i];
+        if (ch === "l" || ch === "L") {
+          let type;
+          const before = i > 0 ? raw[i - 1] : "";
+          const after = i + 1 < raw.length ? raw[i + 1] : "";
+          let left = i;
+          while (left > 0 && !/\s|[.,!?;:"'()\-]/.test(raw[left - 1])) {
+            left--;
+          }
+          let right = i + 1;
+          while (right < raw.length && !/\s|[.,!?;:"'()\-]/.test(raw[right])) {
+            right++;
+          }
+          const word = raw.slice(left, right);
+          const indexInWord = i - left;
+          const isWordStart = indexInWord === 0;
+          type = classifyL(before, after, isWordStart, word, indexInWord);
+          const w = word.toLowerCase();
+          if (!seenWords.has(w)) {
+            seenWords.add(w);
+            const meta = wordMeta.get(w);
+            if (meta) {
+              let line = '<span class="meta-word" data-word="' + escapeHtml(w) + '">' + escapeHtml(w) + "</span> → ";
+              if (meta.madde_lisan) {
+                line += escapeHtml(meta.madde_lisan);
+              } else {
+                line += "lisan bilgisi yok";
+              }
+              if (meta.canonical && meta.canonical.toLowerCase() !== w) {
+                line += " | yazım: " + escapeHtml(meta.canonical);
+              }
+              const lisan = meta.madde_lisan || "";
+              if (
+                meta.thinBySpelling ||
+                lisan.startsWith("Arapça") ||
+                lisan.startsWith("Farsça") ||
+                (lisan.startsWith("Rumca") && w.startsWith("l"))
+              ) {
+                line += " | L: ince sinyali";
+              }
+              if (meta.primary_meaning) {
+                line += " | 1. anlam: " + escapeHtml(meta.primary_meaning);
+              }
+              metaLines.push(line);
+            }
+          }
+          if (type === "thick") {
+            result += '<span class="l-thick">' + escapeHtml(ch) + "</span>";
+          } else {
+            result += '<span class="l-thin">' + escapeHtml(ch) + "</span>";
+          }
+        } else {
+          result += escapeHtml(ch);
+        }
+      }
+      textOutput.innerHTML = result;
+      if (metaLines.length > 0) {
+        metaOutput.innerHTML = metaLines.join("<br>");
+      } else {
+        metaOutput.innerHTML = "";
+      }
+    }
+
+    analyzeButton.addEventListener("click", function () {
+      updateDictionaryForText(textInput.value || "");
+      renderAnalysis();
+    });
+
+    metaOutput.addEventListener("click", function (e) {
+      const target = e.target.closest(".meta-word");
+      if (!target) return;
+      const w = target.getAttribute("data-word");
+      speakWord(w);
+    });
+
+    // Otomatik analiz yok; kullanıcı yalnızca "Analiz et" tuşuna basınca analiz yapılır.
+
+    const timerDisplay = document.getElementById("timerDisplay");
+    const timerHint = document.getElementById("timerHint");
+    const startTimer = document.getElementById("startTimer");
+    const pauseTimer = document.getElementById("pauseTimer");
+    const resetTimer = document.getElementById("resetTimer");
+    const add30 = document.getElementById("add30");
+
+    const warmupSteps = [
+      { type: "exercise", name: "Öpücük çizgi", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Öpücük içten dışa", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Ağız dudak salla", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Dudak ile traktör sesi", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Dil ile yuvarlak (sağdan sola / soldan sağa)", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Dil ısırma", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Dil dışarıda soldan sağa / sağdan sola", duration: 60 },
+      { type: "rest", name: "Dinlen", duration: 10 },
+      { type: "exercise", name: "Dilleme (dil ucu içeri dışarı)", duration: 60 }
+    ];
+
+    let currentStepIndex = 0;
+    let remainingSeconds = warmupSteps[0].duration;
+    let timerId = null;
+    let running = false;
+
+    function formatTime(total) {
+      const m = Math.floor(total / 60);
+      const s = total % 60;
+      return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    function updateTimerView() {
+      const step = warmupSteps[currentStepIndex];
+      timerDisplay.textContent = formatTime(remainingSeconds);
+      const exerciseCount = warmupSteps.filter(s => s.type === "exercise").length;
+      const doneExercises = warmupSteps
+        .slice(0, currentStepIndex + (step.type === "exercise" && remainingSeconds === step.duration ? 0 : 1))
+        .filter(s => s.type === "exercise").length;
+      if (step.type === "exercise") {
+        timerHint.textContent =
+          "Hareket " +
+          doneExercises +
+          "/" +
+          exerciseCount +
+          ": " +
+          step.name +
+          (currentStepIndex + 1 < warmupSteps.length && warmupSteps[currentStepIndex + 1].type === "rest"
+            ? " (sonra 10 sn dinlenme)"
+            : "");
+      } else {
+        timerHint.textContent = "Dinlenme: " + step.name + ". Bir sonraki harekete hazırlan.";
+      }
+    }
+
+    function advanceStep() {
+      if (currentStepIndex + 1 < warmupSteps.length) {
+        currentStepIndex += 1;
+        remainingSeconds = warmupSteps[currentStepIndex].duration;
+        updateTimerView();
+      } else {
+        running = false;
+        if (timerId) {
+          clearInterval(timerId);
+          timerId = null;
+        }
+        timerHint.textContent = "Isınma serisi bitti, artık L çalışmasına geçebilirsin.";
+      }
+    }
+
+    function tick() {
+      if (remainingSeconds > 0) {
+        remainingSeconds -= 1;
+        updateTimerView();
+      } else {
+        advanceStep();
+      }
+    }
+
+    startTimer.addEventListener("click", function () {
+      if (running) return;
+      running = true;
+      timerId = setInterval(tick, 1000);
+    });
+
+    pauseTimer.addEventListener("click", function () {
+      if (!running) return;
+      running = false;
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+    });
+
+    resetTimer.addEventListener("click", function () {
+      running = false;
+      if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+      currentStepIndex = 0;
+      remainingSeconds = warmupSteps[0].duration;
+      updateTimerView();
+    });
+
+    add30.addEventListener("click", function () {
+      const step = warmupSteps[currentStepIndex];
+      remainingSeconds += 30;
+      timerHint.textContent =
+        step.type === "exercise"
+          ? step.name + " için süreye +30 sn eklendi."
+          : "Dinlenmeye +30 sn eklendi, istersen kısaltmak için reset atabilirsin.";
+      updateTimerView();
+    });
+
+    updateTimerView();
+    rebuildThinLexicon();
+  </script>
+</body>
+</html>
