@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rastgele L Çalışması</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 18px 12px 40px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 18px;
+      border: 1px solid #1e293b;
+      padding: 18px 16px 20px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 8px 0 2px;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: #111827;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #9ca3af;
+    }
+    .label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(120deg,#f97316,#38bdf8);
+    }
+    .sentence-box {
+      margin-top: 16px;
+      padding: 14px 12px;
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      min-height: 88px;
+      font-size: 18px;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+    .hint {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .controls {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.45);
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background 0.1s ease-out;
+    }
+    .back-link {
+      font-size: 12px;
+      color: #9ca3af;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    button.secondary {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+      box-shadow: 0 6px 14px rgba(15,23,42,0.7);
+      font-size: 13px;
+      padding: 8px 14px;
+    }
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.7);
+    }
+    .meta {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #9ca3af;
+      white-space: pre-wrap;
+    }
+    @media (min-width: 768px) {
+      .app {
+        max-width: 640px;
+        padding: 24px 20px 64px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .sentence-box {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="label">
+          <span class="label-dot"></span>
+          <span>Rastgele L serisi</span>
+        </div>
+        <span id="backToIndex" class="back-link">← Ana araca dön</span>
+      </div>
+      <h1>Karışık kalın / ince L cümleleri</h1>
+      <p class="subtitle">Kalın ve ince L yüklü kelimelerle yeni cümleler üret.</p>
+
+      <div class="sentence-box" id="sentenceBox"></div>
+      <div class="hint">
+        Her basışta kelimeler karışarak yeni bir cümle oluşur. Cümleyi ana sayfadaki analiz aracına yapıştırıp L’leri kontrol edebilirsin.
+      </div>
+
+      <div class="controls">
+        <button id="shuffleBtn">Karıştır</button>
+        <button class="secondary" id="copyBtn">Cümleyi kopyala</button>
+      </div>
+
+      <div class="meta" id="metaBox"></div>
+
+      <div style="margin-top:18px;border-top:1px solid #1f2937;padding-top:14px;">
+        <h2 style="font-size:14px;margin:0 0 6px;">Kalın L cümleleri</h2>
+        <div style="font-size:13px;line-height:1.6;color:#e5e7eb;white-space:pre-line;">
+Baltalı kolağası lalapaşanın halılarına halasının bol pantolonlu palabıyıklı balcıbaşısına Balgat'la Bağdat'ta palan döktürdü.
+
+Alan alır kalan kalır daralan bollaşır.
+
+Yalancı yalama dolambaçı yollardan darala darala Allah Allah diyerek kalabalık alana daldı.
+
+Falancanın halası onikiye on kala börekle balla taçlı haçlının ve dahi yalancı dolandırıcının allı pullu karanlığına baltayla dalmış.
+
+Folluk Allah'tan dolu da dolu dolu dolamacının bol bol Bolu'lu kalabalık ağzından dolandırıcının sesi "fol yok yol yok" demedi.
+
+Aralık doğumlu kolcunun falafel baltalayan Oflu ablası çok ağladı.
+        </div>
+      </div>
+
+      <div style="margin-top:18px;border-top:1px solid #1f2937;padding-top:14px;">
+        <h2 style="font-size:14px;margin:0 0 6px;">İnce L cümleleri</h2>
+        <div style="font-size:13px;line-height:1.6;color:#e5e7eb;white-space:pre-line;">
+Lay lay lom lay lay lom.
+
+Lord layık olduğunca eyyamcı Lale'nin Leyla'nın labadasını lamba ışığında yemesini istemedi.
+
+Alaaddin Lamba'nın Cini'ne lambada mısın yoksa balistikçi palyaçonun yanında mısın dedi.
+
+Lafazan Lale Laleli'de laleci Leyla'yla laf ederken Laleli'nin laleleri lay lay diyerek Lafazan Lale'nin yarine gittiler.
+
+Lale ela gözleri bela Leyla kadar meyyaldi aşk-ı belaya lakin Leyla ela ela bakınca Lale sümbül layığınca kelam edemedi Kemal'in gülcemaline.
+
+Labada lordu Letafet Bey şikayet eder Leydi Lafayet'ten lakin lahmacun lemur için bela leblebiler lafebesi laylaylom ederken lağımcıya iletilmiştir.
+        </div>
+      </div>
+
+      <div style="margin-top:18px;border-top:1px solid #1f2937;padding-top:14px;">
+        <h2 style="font-size:14px;margin:0 0 6px;">Kalın + ince L karışık cümleler</h2>
+        <div style="font-size:13px;line-height:1.6;color:#e5e7eb;white-space:pre-line;">
+Belalı kalafatçı Kalafatı lamba yarıcılara çekti.
+
+Dolandırıcının yalan dolu bakışları hâlâ laflamakta olan halayıkla lord'da idi.
+
+Lağımcı Züleyha'ya zalim dedi ama layık olduğu gibi palabıyıklı palalı belalı palacıbaşılardan lafla lambalamanın mümkün olmadığını anladı.
+
+Lale baloncu Kalın Mustafa'yla beraber hâlâ halasının halılarını yolcu lambalarına asıyor.
+
+Labadalar altın elmaların altında kalırsa laflamaya meyyal eyyamcı baka ağlar.
+
+Bolayır'ı Latife falancanın kalburunda, lakin filancanın dolmaları Latife'yi bağladı.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const phrasePools = [
+      {
+        name: "Lale / bela / Leyla / meyyal",
+        starts: [
+          "Lale ela gözleriyle",
+          "Ela gözlü Leyla",
+          "Lirik Lalezar solisti Leyla",
+          "Lale dalgalı leylak tarlalarının önünde",
+          "Meyyal Leyla leylak moru elbisesiyle"
+        ],
+        middles: [
+          "belalı melodiler söyleyip",
+          "lirik melodilerle belaya meyyal olup",
+          "lale tarlalarının yanında lirik nağmelerle",
+          "lale desenli levhalara bakarak",
+          "melal dolu melodilerle lirik nağmeler söyleyerek"
+        ],
+        ends: [
+          "kalpleri lale yaprakları gibi lal bıraktı",
+          "meyyal kalpleri belalı gecelere lütuf saydı",
+          "lâle desenli halılara yaslanıp melal dolu kaldı",
+          "lale dolu balkonlarda lal kalmış bakışlar bıraktı",
+          "belanın bile lütuf sayıldığı leylak kokulu bir gece yaşattı"
+        ]
+      },
+      {
+        name: "Lalapaşa / balcıbaşı / palyaço",
+        starts: [
+          "Baltalı kolağası Lalapaşa'nın halılarına",
+          "Palabıyıklı balcıbaşı Balgat'la Bağdat'ta",
+          "Lalapaşalı palyaço Balgatlılarla birlikte",
+          "Lalapaşalı balcıbaşının ballı lokmalarıyla",
+          "Lalapaşa levhasının altında toplanan kalabalık"
+        ],
+        middles: [
+          "bol palan döktürüp palyaçolarla",
+          "balya balı paldır küldür yükleyip",
+          "kalın sesli lakırdıları bağırıp çağırıp",
+          "lal kalmış seyircileri kahkahayla boğarak",
+          "palyaço lakırdılarıyla balcıbaşının lakabını uzatarak"
+        ],
+        ends: [
+          "halasının bol pantolonlu palyaçosunu alkışlattı",
+          "Bağdat pazarında ballı lokmaları paldır küldür sattı",
+          "bütün lal kalmış mahalleyi kahkahaya boğdu",
+          "Lalapaşa meydanını bal kokulu bir lunaparka çevirdi",
+          "balya balya lokumları palyaço maskeleriyle süsleyip dağıttı"
+        ]
+      },
+      {
+        name: "Belâ / melâl / meyyal Leyla",
+        starts: [
+          "Belâ dolu melâlini meyyal Leyla",
+          "Melankolik Leyla melâl dolu Lalezar'da",
+          "Meyyal kalpli Leyla lâl dudaklı Lale'yle",
+          "Melal dolu Leyla levhalarla dolu loş sokakta",
+          "Lâl kalmış Leyla leylaklı levhaların önünde"
+        ],
+        middles: [
+          "lirik nağmelerle dile getirip",
+          "lâl mermerli levhaları okurken",
+          "melal dolu melodilerle belaya meyilli olup",
+          "melâl içeren mısraları lirik bir dille anlatarak",
+          "belalı levhalardaki lâl kelimeleri tek tek okuyarak"
+        ],
+        ends: [
+          "melalden melale savrulan kalbini teselli etmeye çalıştı",
+          "belayı bile lütuf sayan ince nağmelerde lal kaldı",
+          "lâyık olmadığı halde belayı kendine pay etti",
+          "melal dolu levhaları okuyup lal kalanlara ses oldu",
+          "lirik melodilerle melâli lezzetli bir lütfa dönüştürdü"
+        ]
+      },
+      {
+        name: "Günlük L pratikleri",
+        starts: [
+          "Okulda lisedeki lirik konuşmacı",
+          "Laptoplu Leyla lambalı lojmanda",
+          "Lokantada lapa pilavlı lüfer yiyen Lal",
+          "Lise lobisinde latte içen Lal",
+          "Lodoslu akşamda lojmanın loş balkonunda Leyla"
+        ],
+        middles: [
+          "lakin lafı uzatmadan",
+          "loş ışıkta içten içe gülerken",
+          "lütfen kelimelerdeki ince nağmeleri kalınlardan ayırarak",
+          "laptopundan lirik metinleri açıp",
+          "levhada yazan uzun lâfzı kayıtları okurken"
+        ],
+        ends: [
+          "metni yüksek sesle okudu",
+          "dilini dolaştıran tüm lâtif heceleri yakalamaya çalıştı",
+          "lise lobisinde lüle lüle sözlerini prova etti",
+          "lambalı lojmanın loş merdivenlerinde yankıları dinledi",
+          "lokumlu kahvesini yudumlarken lâtif kelimeleri lezzetle tekrarladı"
+        ]
+      },
+      {
+        name: "Lalezar / meyhane / belalı melodiler",
+        starts: [
+          "Lalezar sokaklarında meyhane kapısında",
+          "Lalezar'da meyyal Leyla",
+          "Lale'yle Leyla leylak kokulu Lalezar'da",
+          "Lalezar levhasının altında leylak satan lal bir satıcı",
+          "Lal kalmış lavantalı lambalarla süslü Lalezar meyhanesi"
+        ],
+        middles: [
+          "belalı melodilerle melankolik meyhane şarkıları söyleyip",
+          "lirik sazlarla melal dolu nağmeler dinleyip",
+          "leylak moru lambalar altında lal kalıp",
+          "lale desenli masalarda liralık lokumlar yerken",
+          "belalı mısraları uzun nağmelerle uzatarak"
+        ],
+        ends: [
+          "lale desenli masalara yaslanarak ince nağmeleri zorladı",
+          "belalı gecelerin kalın ve ince nağmeleriyle dili dolaştı",
+          "melodiyle melale karışan laflarını zor toparladı",
+          "lodoslu gecede lafzen lezzetli bir lakırdıya çevirdi",
+          "lavantalı meyhane salonunu lirik yankılarla doldurdu"
+        ]
+      },
+      {
+        name: "Liman / Lâleli / Galata / Karaköy",
+        starts: [
+          "Lâleli'den Galata'ya yürüyen lal bir turist",
+          "Karaköy limanında lapa lapa yağan yağmur altında",
+          "Liman lokantasında lüfer bekleyen Lale",
+          "Lodoslu gecede Galata köprüsünde lakayt balıkçılar",
+          "Lâleli tramvayında lavantalı şalına sarılan Leyla"
+        ],
+        middles: [
+          "lodosla dalgalanan lamine levhalara bakarak",
+          "löp löp lokma yerken limandaki lambaları sayarak",
+          "lakin lüle lüle dalgaların sesine kulak vererek",
+          "lokumlu kahvelerini yudumlarken lafları uzatarak",
+          "lale desenli levhalar arasından liman yolunu arayarak"
+        ],
+        ends: [
+          "her tabeladaki lâfzı ayrı bir kalınlıkla telaffuz etti",
+          "Galata'dan Karaköy'e kadar levhaları sayarak yürüdü",
+          "liman lokantasının loş salonunda lal kalıp dinlendi",
+          "lodosla savrulan laflarını Lâleli'ye kadar taşıdı",
+          "lavanta kokulu şalına lâtif hikâyeler doldurdu"
+        ]
+      }
+    ];
+
+    function randomChoice(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function buildRandomSentence() {
+      const pool = randomChoice(phrasePools);
+      const start = randomChoice(pool.starts);
+      const middle = randomChoice(pool.middles);
+      const end = randomChoice(pool.ends);
+      let text = start + " " + middle + " " + end;
+      if (!/[.!?]$/.test(text)) {
+        text += ".";
+      }
+      return { text, meta: pool.name };
+    }
+
+    function renderSentence() {
+      const box = document.getElementById("sentenceBox");
+      const meta = document.getElementById("metaBox");
+      const s = buildRandomSentence();
+      box.textContent = s.text;
+      meta.textContent = "Cümle havuzu: " + s.meta;
+    }
+
+    document.getElementById("shuffleBtn").addEventListener("click", renderSentence);
+
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      const text = document.getElementById("sentenceBox").textContent.trim();
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+      } else {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try {
+          document.execCommand("copy");
+        } catch (e) {}
+        document.body.removeChild(temp);
+      }
+    });
+
+    const backToIndex = document.getElementById("backToIndex");
+    if (backToIndex) {
+      backToIndex.addEventListener("click", function () {
+        window.location.href = "index.html";
+      });
+    }
+
+    renderSentence();
+  </script>
+</body>
+</html>

@@ -358,9 +358,12 @@
     </div>
 
     <div class="card studio-main">
-        <div class="label">
-          <span class="label-dot label-dot-cool"></span>
-          <span>L analizi</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+          <div class="label">
+            <span class="label-dot label-dot-cool"></span>
+            <span>L analizi</span>
+          </div>
+          <button id="goRandomPage" class="secondary small">Random L cümleleri</button>
         </div>
         <h3>Kalın / ince L bulma aracı</h3>
         <p>Metni yapıştır, kalın ve ince L’leri renklendirilmiş gör.</p>
@@ -531,6 +534,7 @@
     const analyzeButton = document.getElementById("analyzeButton");
     const sampleSelect = document.getElementById("sampleSelect");
     const thinLexiconInput = document.getElementById("thinLexiconInput");
+    const goRandomPage = document.getElementById("goRandomPage");
 
     const defaultThinWords = [
       "bela",
@@ -601,6 +605,12 @@
     thinLexiconInput.addEventListener("input", function () {
       rebuildThinLexicon();
     });
+
+    if (goRandomPage) {
+      goRandomPage.addEventListener("click", function () {
+        window.location.href = "random-l-calisma.html";
+      });
+    }
 
     function reduceForRootLookup(w) {
       const suffixes = [
