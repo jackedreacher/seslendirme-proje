@@ -305,10 +305,34 @@
     .studio-main {
       margin-top: 8px;
     }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .top-nav-title {
+      font-size: 14px;
+      color: #9ca3af;
+    }
+    .top-nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
     .card-plan {
       display: none;
     }
     @media (max-width: 640px) {
+      .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-nav-buttons {
+        justify-content: flex-start;
+      }
       .studio-header {
         flex-direction: column;
         align-items: flex-start;
@@ -338,6 +362,15 @@
 <body>
   <div class="app">
 
+    <div class="top-nav">
+      <div class="top-nav-title">Ses stüdyosu menüsü</div>
+      <div class="top-nav-buttons">
+        <button id="goTwisterPage" class="secondary small">Tekerlemeler</button>
+        <button id="goKalemPage" class="secondary small">Kalemli L</button>
+        <button id="goRandomPage" class="secondary small">Random L</button>
+      </div>
+    </div>
+
     <div class="studio-header">
       <div class="studio-header-main">
         <div class="label">
@@ -358,16 +391,9 @@
     </div>
 
     <div class="card studio-main">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
-          <div class="label">
-            <span class="label-dot label-dot-cool"></span>
-            <span>L analizi</span>
-          </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;">
-            <button id="goTwisterPage" class="secondary small">Tekerlemeler</button>
-            <button id="goKalemPage" class="secondary small">Kalemli L</button>
-            <button id="goRandomPage" class="secondary small">Random L</button>
-          </div>
+        <div class="label">
+          <span class="label-dot label-dot-cool"></span>
+          <span>L analizi</span>
         </div>
         <h3>Kalın / ince L bulma aracı</h3>
         <p>Metni yapıştır, kalın ve ince L’leri renklendirilmiş gör.</p>
