@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Genel Tekerleme Çalışma Sayfası</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .app {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 12px 40px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 18px;
+      border: 1px solid #1e293b;
+      padding: 18px 16px 20px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+      margin-top: 20px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: #111827;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #9ca3af;
+    }
+    .label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(120deg,#f97316,#38bdf8);
+    }
+    .back-link {
+      font-size: 12px;
+      color: #9ca3af;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 10px 0 4px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .twister-section-title {
+      font-size: 15px;
+      margin: 16px 0 8px;
+    }
+    .twister-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .twister-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .twister-card {
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      padding: 10px 11px 12px;
+      background: #020617;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .twister-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .twister-tag {
+      border-radius: 999px;
+      padding: 2px 7px;
+      border: 1px solid #1f2937;
+    }
+    .twister-tag-zs {
+      border-color: #22c55e;
+      color: #bbf7d0;
+    }
+    .twister-tag-other {
+      border-color: #64748b;
+      color: #cbd5f5;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="header-row">
+        <div class="label">
+          <span class="label-dot"></span>
+          <span>Genel tekerlemeler</span>
+        </div>
+        <span id="backToIndexTwisters" class="back-link">← Ana araca dön</span>
+      </div>
+      <h1>Genel tekerleme çalışma sayfası</h1>
+      <p class="subtitle">Ses, tempo ve artikülasyon için farklı ses odaklı tekerlemeler.</p>
+
+      <h2 class="twister-section-title">Z / S yoğun tekerlemeler</h2>
+      <div class="twister-grid">
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#1</span>
+            <span class="twister-tag twister-tag-zs">Z / S yoğun</span>
+          </div>
+          <div>
+            Şu köşe yaz köşesi şu köşe kış köşesi şu köşe güz köşesi ortada su şişesi.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#2</span>
+            <span class="twister-tag twister-tag-zs">S yoğun</span>
+          </div>
+          <div>
+            Sersemsepelek susamcı, sinesinde sektirdiği silahtar semizin sakızlı sakalından sabah sağanlığında sabahlıkla duran sahavet sahibi Sacide kadar sahiden sahteleşemez.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#3</span>
+            <span class="twister-tag twister-tag-zs">Z yoğun</span>
+          </div>
+          <div>
+            Zürafa zembereği zencefilli zehrin zerkedilişi zemininde ziyan zebil olunca, zebellah gibi zamane cüceleri zemzem zamanında zuhur etti.
+          </div>
+        </div>
+      </div>
+
+      <h2 class="twister-section-title">Diğer tekerlemeler</h2>
+      <div class="twister-grid">
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#4</span>
+            <span class="twister-tag twister-tag-other">K / H yoğun</span>
+          </div>
+          <div>
+            Kahtalı hala hala halkın halaskargazi lambalarını, kat kat kagir kalıplı kabakkemane kağıtlarından kalabalık yardımcılarına dağıtır.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#5</span>
+            <span class="twister-tag twister-tag-other">B yoğun</span>
+          </div>
+          <div>
+            Babasının benekli búdırcını bitişik bostanda böceklerden bunalarak büzüldü.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#6</span>
+            <span class="twister-tag twister-tag-other">T / K yoğun</span>
+          </div>
+          <div>
+            Al bu takatukaları takatukacıya takatukalatmaya götür, takatukacı takatukaları takatukalamam derse takatukaları takatukacıdan takatukalatmadan al da gel.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#7</span>
+            <span class="twister-tag twister-tag-other">K yoğun</span>
+          </div>
+          <div>
+            Kırk kartal kırkının da kanadı kırık kara kartal, kırk kanadı kırık kara kartal konar dal sarkar, kırk kanadı kırık kara kartal kalkar dal kalkar.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#8</span>
+            <span class="twister-tag twister-tag-other">Ç / T yoğun</span>
+          </div>
+          <div>
+            Çatalcalı topal çoban çatal yapıp çatal satar, Çatalcalı topal çoban nesi için çatal yapıp çatal satar? Çatalcalı topal çoban karı için çatal yapıp çatal satar.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#9</span>
+            <span class="twister-tag twister-tag-other">K yoğun</span>
+          </div>
+          <div>
+            Kedi kendi kendinin kadim kenevirlerini tencereye devşirip pencereye seyirtti.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#10</span>
+            <span class="twister-tag twister-tag-other">C / Ç yoğun</span>
+          </div>
+          <div>
+            Cenevizli cavlak cayırcayır cayırdarken, camcının canı alınası cancalakları camdan contayı canavarlaştırıyorlardı.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#11</span>
+            <span class="twister-tag twister-tag-other">S yoğun</span>
+          </div>
+          <div>
+            Üç tunç tas has kayısı hoşafı.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#12</span>
+            <span class="twister-tag twister-tag-other">J yoğun</span>
+          </div>
+          <div>
+            Jamboncu Jale jelibonları objektif Zeynaya jileli jölelerle jiletleyip verdi.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#13</span>
+            <span class="twister-tag twister-tag-other">D / R yoğun</span>
+          </div>
+          <div>
+            A be kuru dayı ne kuru sarı darı bu darı a be kuru dayı?
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#14</span>
+            <span class="twister-tag twister-tag-other">B / R yoğun</span>
+          </div>
+          <div>
+            Bir berber bir berbere bre berber birader gel beraber bir berber dükkanı açalım demiş.
+          </div>
+        </div>
+        <div class="twister-card">
+          <div class="twister-meta">
+            <span>#15</span>
+            <span class="twister-tag twister-tag-other">G / L yoğun</span>
+          </div>
+          <div>
+            Gelin Gülin görümcesinin örümceğini gönüllü Gülizin gönlündeyken görüp götürdü.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const back = document.getElementById("backToIndexTwisters");
+      if (back) {
+        back.addEventListener("click", function () {
+          window.location.href = "index.html";
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+

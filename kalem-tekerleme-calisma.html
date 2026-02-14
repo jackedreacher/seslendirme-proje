@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalemli L Tekerleme Çalışması</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .app {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 18px 12px 40px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 18px;
+      border: 1px solid #1e293b;
+      padding: 18px 16px 20px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 8px 0 4px;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .timer-panel {
+      margin-top: 12px;
+      margin-bottom: 16px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.35), transparent 55%), #020617;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .timer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .timer-title {
+      font-size: 12px;
+      color: #cbd5f5;
+    }
+    .timer-display {
+      font-size: 26px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
+      color: #e5e7eb;
+    }
+    .timer-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .timer-buttons button {
+      padding: 6px 12px;
+      font-size: 12px;
+      box-shadow: 0 6px 14px rgba(37,99,235,0.35);
+    }
+    .section-title {
+      font-size: 15px;
+      margin: 14px 0 6px;
+      color: #e5e7eb;
+    }
+    .drill-card {
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      padding: 11px 12px 12px;
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.9), #020617);
+      margin-bottom: 12px;
+    }
+    .drill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .drill-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid #1f2937;
+    }
+    .drill-tag-thick {
+      border-color: #f97316;
+      color: #fed7aa;
+    }
+    .drill-tag-thin {
+      border-color: #38bdf8;
+      color: #bae6fd;
+    }
+    .drill-tag-mix {
+      border-color: #a855f7;
+      color: #e9d5ff;
+    }
+    .drill-index {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .drill-text {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .drill-lines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .drill-line {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      font-size: 12px;
+      color: #e5e7eb;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease-out, border-color 0.15s ease-out, box-shadow 0.15s ease-out, transform 0.05s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+    .drill-line-active {
+      border-color: #1d4ed8;
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.28), #020617);
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.35);
+      transform: translateY(-1px);
+    }
+    .drill-line-progress {
+      position: absolute;
+      left: 3px;
+      right: 3px;
+      bottom: 2px;
+      height: 3px;
+      border-radius: 999px;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      pointer-events: none;
+      transition: width 0.25s linear;
+    }
+    .drill-line:hover {
+      border-color: #1f2937;
+      background: #020617;
+      box-shadow: 0 0 0 1px rgba(15,23,42,0.8);
+    }
+    .drill-line input {
+      width: 14px;
+      height: 14px;
+      accent-color: #1d4ed8;
+    }
+    .info {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    @media (min-width: 768px) {
+      .app {
+        max-width: 720px;
+        padding: 24px 20px 64px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+        <h1 style="margin:8px 0 4px;font-size:20px;">Kalemli L tekerleme çalışma sayfası</h1>
+        <span id="backToIndexKalem" style="font-size:12px;color:#9ca3af;cursor:pointer;text-decoration:underline;">← Ana araca dön</span>
+      </div>
+      <p class="subtitle">Her tekerlemeye 5 dk yatay, 5 dk dikey kalemle çalış.</p>
+      <div class="info">
+        Ağızda kalemi yatay tuttuktan sonra ilgili satırdaki <strong>yatay</strong> kutucuğu işaretle.
+        Sonra kalemi dikey konuma alıp aynı tekerlemeyi tekrar 5 dakika çalış ve <strong>dikey</strong> kutucuğunu işaretle.
+        Haftanın sonunda tüm kutucukların dolması hedeflenir.
+      </div>
+
+      <div class="timer-panel">
+        <div class="timer-row">
+          <div>
+            <div class="timer-title">Kalemli çalışma kronometresi</div>
+            <div id="ktTimerDisplay" class="timer-display">05:00</div>
+          </div>
+          <div class="timer-buttons">
+            <button id="ktStart">▶ Başlat</button>
+            <button id="ktPause" class="secondary">⏸ Duraklat</button>
+            <button id="ktReset" class="secondary">⟲ Sıfırla</button>
+          </div>
+        </div>
+        <div class="timer-title">
+          Bir satıra tıkladığında o satır için 5 dk geri sayım başlar.
+        </div>
+      </div>
+
+      <h2 class="section-title">Kalın L tekerlemeleri</h2>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thick">Kalın L</span>
+          <span class="drill-index">#1</span>
+        </div>
+        <div class="drill-text">
+          Baltalı kolağası lalapaşanın halılarına halasının bol pantolonlu palabıyıklı balcıbaşısına Balgat'la Bağdat'ta palan döktürdü.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thick">Kalın L</span>
+          <span class="drill-index">#2</span>
+        </div>
+        <div class="drill-text">
+          Alan alır kalan kalır daralan bollaşır.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thick">Kalın L</span>
+          <span class="drill-index">#3</span>
+        </div>
+        <div class="drill-text">
+          Yalancı yalama dolambaçı yollardan darala darala Allah Allah diyerek kalabalık alana daldı.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thick">Kalın L</span>
+          <span class="drill-index">#4</span>
+        </div>
+        <div class="drill-text">
+          Falancanın halası onikiye on kala börekle balla taçlı haçlının ve dahi yalancı dolandırıcının allı pullu karanlığına baltayla dalmış.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thick">Kalın L</span>
+          <span class="drill-index">#5</span>
+        </div>
+        <div class="drill-text">
+          Folluk Allah'tan dolu da dolu dolu dolamacının bol bol Bolu'lu kalabalık ağzından dolandırıcının sesi "fol yok yol yok" demedi.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thick">Kalın L</span>
+          <span class="drill-index">#6</span>
+        </div>
+        <div class="drill-text">
+          Aralık doğumlu kolcunun falafel baltalayan Oflu ablası çok ağladı.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <h2 class="section-title">İnce L tekerlemeleri</h2>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thin">İnce L</span>
+          <span class="drill-index">#7</span>
+        </div>
+        <div class="drill-text">
+          Lay lay lom lay lay lom.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thin">İnce L</span>
+          <span class="drill-index">#8</span>
+        </div>
+        <div class="drill-text">
+          Lord layık olduğunca eyyamcı Lale'nin Leyla'nın labadasını lamba ışığında yemesini istemedi.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thin">İnce L</span>
+          <span class="drill-index">#9</span>
+        </div>
+        <div class="drill-text">
+          Alaaddin Lamba'nın Cini'ne lambada mısın yoksa balistikçi palyaçonun yanında mısın dedi.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thin">İnce L</span>
+          <span class="drill-index">#10</span>
+        </div>
+        <div class="drill-text">
+          Lafazan Lale Laleli'de laleci Leyla'yla laf ederken Laleli'nin laleleri lay lay diyerek Lafazan Lale'nin yarine gittiler.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thin">İnce L</span>
+          <span class="drill-index">#11</span>
+        </div>
+        <div class="drill-text">
+          Lale ela gözleri bela Leyla kadar meyyaldi aşk-ı belaya lakin Leyla ela ela bakınca Lale sümbül layığınca kelam edemedi Kemal'in gülcemaline.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-thin">İnce L</span>
+          <span class="drill-index">#12</span>
+        </div>
+        <div class="drill-text">
+          Labada lordu Letafet Bey şikayet eder Leydi Lafayet'ten lakin lahmacun lemur için bela leblebiler lafebesi laylaylom ederken lağımcıya iletilmiştir.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <h2 class="section-title">Kalın + ince L karışık tekerlemeler</h2>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Karışık</span>
+          <span class="drill-index">#13</span>
+        </div>
+        <div class="drill-text">
+          Belalı kalafatçı Kalafatı lamba yarıcılara çekti.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Karışık</span>
+          <span class="drill-index">#14</span>
+        </div>
+        <div class="drill-text">
+          Dolandırıcının yalan dolu bakışları hâlâ laflamakta olan halayıkla lord'da idi.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Karışık</span>
+          <span class="drill-index">#15</span>
+        </div>
+        <div class="drill-text">
+          Lağımcı Züleyha'ya zalim dedi ama layık olduğu gibi palabıyıklı palalı belalı palacıbaşılardan lafla lambalamanın mümkün olmadığını anladı.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Karışık</span>
+          <span class="drill-index">#16</span>
+        </div>
+        <div class="drill-text">
+          Lale baloncu Kalın Mustafa'yla beraber hâlâ halasının halılarını yolcu lambalarına asıyor.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Karışık</span>
+          <span class="drill-index">#17</span>
+        </div>
+        <div class="drill-text">
+          Labadalar altın elmaların altında kalırsa laflamaya meyyal eyyamcı baka ağlar.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Karışık</span>
+          <span class="drill-index">#18</span>
+        </div>
+        <div class="drill-text">
+          Bolayır'ı Latife falancanın kalburunda, lakin filancanın dolmaları Latife'yi bağladı.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <h2 class="section-title">Z / S yoğun tekerlemeler (kalemli)</h2>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Z / S</span>
+          <span class="drill-index">#19</span>
+        </div>
+        <div class="drill-text">
+          Şu köşe yaz köşesi şu köşe kış köşesi şu köşe güz köşesi ortada su şişesi.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">S yoğun</span>
+          <span class="drill-index">#20</span>
+        </div>
+        <div class="drill-text">
+          Sersemsepelek susamcı, sinesinde sektirdiği silahtar semizin sakızlı sakalından sabah sağanlığında sabahlıkla duran sahavet sahibi Sacide kadar sahiden sahteleşemez.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">Z yoğun</span>
+          <span class="drill-index">#21</span>
+        </div>
+        <div class="drill-text">
+          Zürafa zembereği zencefilli zehrin zerkedilişi zemininde ziyan zebil olunca, zebellah gibi zamane cüceleri zemzem zamanında zuhur etti.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+
+      <div class="drill-card">
+        <div class="drill-header">
+          <span class="drill-tag drill-tag-mix">S yoğun</span>
+          <span class="drill-index">#22</span>
+        </div>
+        <div class="drill-text">
+          Üç tunç tas has kayısı hoşafı.
+        </div>
+        <div class="drill-lines">
+          <label class="drill-line"><input type="checkbox">Yatay kalem (5 dk)</label>
+          <label class="drill-line"><input type="checkbox">Dikey kalem (5 dk)</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const display = document.getElementById("ktTimerDisplay");
+      const startBtn = document.getElementById("ktStart");
+      const pauseBtn = document.getElementById("ktPause");
+      const resetBtn = document.getElementById("ktReset");
+      const backLink = document.getElementById("backToIndexKalem");
+
+      let total = 300;
+      let remaining = total;
+      let running = false;
+      let timerId = null;
+      let activeLine = null;
+      let activeCheckbox = null;
+
+      function format(sec) {
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+      }
+
+      function update() {
+        display.textContent = format(remaining);
+      }
+
+      function clearTimer() {
+        if (timerId) {
+          clearInterval(timerId);
+          timerId = null;
+        }
+        running = false;
+      }
+
+      function updateBar() {
+        if (!activeLine) return;
+        const bar = activeLine.querySelector(".drill-line-progress");
+        if (!bar) return;
+        const progress = (total - remaining) / total;
+        const clamped = Math.max(0, Math.min(1, progress));
+        bar.style.width = (clamped * 100).toFixed(1) + "%";
+      }
+
+      function tick() {
+        if (remaining > 0) {
+          remaining -= 1;
+          update();
+          updateBar();
+          if (remaining === 0) {
+            let nextLine = null;
+            if (activeCheckbox) {
+              activeCheckbox.checked = true;
+            }
+            if (activeLine) {
+              const text = activeLine.textContent || "";
+              if (text.indexOf("Yatay kalem") !== -1 && activeLine.parentElement) {
+                const candidates = activeLine.parentElement.querySelectorAll(".drill-line");
+                for (let i = 0; i < candidates.length; i++) {
+                  const c = candidates[i];
+                  if (c === activeLine) continue;
+                  const t = c.textContent || "";
+                  if (t.indexOf("Dikey kalem") !== -1) {
+                    nextLine = c;
+                    break;
+                  }
+                }
+              }
+            }
+            clearTimer();
+            if (nextLine) {
+              selectLine(nextLine);
+            }
+          }
+        } else {
+          clearTimer();
+        }
+      }
+
+      startBtn.addEventListener("click", function () {
+        if (!activeLine) return;
+        if (running) return;
+        if (remaining <= 0) {
+          remaining = total;
+          update();
+        }
+        running = true;
+        timerId = setInterval(tick, 1000);
+      });
+
+      pauseBtn.addEventListener("click", function () {
+        if (!running) return;
+        clearTimer();
+      });
+
+      resetBtn.addEventListener("click", function () {
+        clearTimer();
+        remaining = total;
+        update();
+        if (activeLine) {
+          const bar = activeLine.querySelector(".drill-line-progress");
+          if (bar) bar.style.width = "0%";
+        }
+      });
+
+      const lines = document.querySelectorAll(".drill-line");
+
+      function selectLine(line) {
+        clearTimer();
+        remaining = total;
+        update();
+        if (activeLine) {
+          activeLine.classList.remove("drill-line-active");
+          const oldBar = activeLine.querySelector(".drill-line-progress");
+          if (oldBar) oldBar.style.width = "0%";
+        }
+        activeLine = line;
+        activeCheckbox = line.querySelector("input[type=checkbox]");
+        activeLine.classList.add("drill-line-active");
+        let bar = activeLine.querySelector(".drill-line-progress");
+        if (!bar) {
+          bar = document.createElement("div");
+          bar.className = "drill-line-progress";
+          activeLine.insertBefore(bar, activeLine.firstChild);
+        }
+        bar.style.width = "0%";
+        running = true;
+        timerId = setInterval(tick, 1000);
+      }
+
+      lines.forEach(function (line) {
+        line.addEventListener("click", function (e) {
+          if (e.target.tagName.toLowerCase() === "input") {
+            e.stopPropagation();
+            return;
+          }
+          e.preventDefault();
+          selectLine(line);
+        });
+      });
+
+      if (backLink) {
+        backLink.addEventListener("click", function () {
+          window.location.href = "index.html";
+        });
+      }
+
+      update();
+    })();
+  </script>
+</body>
+</html>

@@ -363,7 +363,11 @@
             <span class="label-dot label-dot-cool"></span>
             <span>L analizi</span>
           </div>
-          <button id="goRandomPage" class="secondary small">Random L cümleleri</button>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;">
+            <button id="goTwisterPage" class="secondary small">Genel tekerlemeler</button>
+            <button id="goKalemPage" class="secondary small">Kalemli L tekerlemeler</button>
+            <button id="goRandomPage" class="secondary small">Random L cümleleri</button>
+          </div>
         </div>
         <h3>Kalın / ince L bulma aracı</h3>
         <p>Metni yapıştır, kalın ve ince L’leri renklendirilmiş gör.</p>
@@ -535,6 +539,8 @@
     const sampleSelect = document.getElementById("sampleSelect");
     const thinLexiconInput = document.getElementById("thinLexiconInput");
     const goRandomPage = document.getElementById("goRandomPage");
+    const goTwisterPage = document.getElementById("goTwisterPage");
+    const goKalemPage = document.getElementById("goKalemPage");
 
     const defaultThinWords = [
       "bela",
@@ -609,6 +615,18 @@
     if (goRandomPage) {
       goRandomPage.addEventListener("click", function () {
         window.location.href = "random-l-calisma.html";
+      });
+    }
+
+    if (goTwisterPage) {
+      goTwisterPage.addEventListener("click", function () {
+        window.location.href = "tekerlemeler.html";
+      });
+    }
+
+    if (goKalemPage) {
+      goKalemPage.addEventListener("click", function () {
+        window.location.href = "kalem-tekerleme-calisma.html";
       });
     }
 
