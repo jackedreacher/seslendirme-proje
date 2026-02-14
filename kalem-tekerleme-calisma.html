@@ -47,6 +47,32 @@
       flex-direction: column;
       gap: 8px;
     }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.45);
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background 0.1s ease-out;
+    }
+    button.secondary {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+      box-shadow: 0 6px 14px rgba(15,23,42,0.7);
+      font-size: 13px;
+      padding: 8px 14px;
+    }
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.7);
+    }
     .timer-row {
       display: flex;
       align-items: center;
@@ -192,13 +218,13 @@
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
         <h1 style="margin:8px 0 4px;font-size:20px;">Kalemli L tekerleme çalışma sayfası</h1>
-        <span id="backToIndexKalem" style="font-size:12px;color:#9ca3af;cursor:pointer;text-decoration:underline;">← Ana araca dön</span>
+        <span id="backToIndexKalem" style="font-size:12px;color:#9ca3af;cursor:pointer;text-decoration:underline;">← Geri dön</span>
       </div>
       <p class="subtitle">Her tekerlemeye 5 dk yatay, 5 dk dikey kalemle çalış.</p>
       <div class="info">
         Ağızda kalemi yatay tuttuktan sonra ilgili satırdaki <strong>yatay</strong> kutucuğu işaretle.
         Sonra kalemi dikey konuma alıp aynı tekerlemeyi tekrar 5 dakika çalış ve <strong>dikey</strong> kutucuğunu işaretle.
-        Haftanın sonunda tüm kutucukların dolması hedeflenir.
+        
       </div>
 
       <div class="timer-panel">
@@ -208,9 +234,9 @@
             <div id="ktTimerDisplay" class="timer-display">05:00</div>
           </div>
           <div class="timer-buttons">
-            <button id="ktStart">▶ Başlat</button>
-            <button id="ktPause" class="secondary">⏸ Duraklat</button>
-            <button id="ktReset" class="secondary">⟲ Sıfırla</button>
+            <button id="ktStart">Başlat</button>
+            <button id="ktPause" class="secondary">Duraklat</button>
+            <button id="ktReset" class="secondary">Sıfırla</button>
           </div>
         </div>
         <div class="timer-title">
