@@ -232,6 +232,10 @@
       padding: 4px 10px;
       font-size: 12px;
     }
+    .placement-label {
+      font-size: 12px;
+      color: #9ca3af;
+    }
     .persona-note {
       font-size: 12px;
       color: #9ca3af;
@@ -324,6 +328,14 @@
             <option value="old">70+ çok yaşlı</option>
           </select>
           <button id="randomCombo" class="secondary">Bugün için kombin üret</button>
+        </div>
+        <div class="practice-row">
+          <span class="placement-label">Ses yerleşimi:</span>
+          <select id="placementSelect" class="select-small">
+            <option value="normal">Normal</option>
+            <option value="nasal">Burundan (nazal)</option>
+            <option value="throat">Gırtlaktan (boğaz)</option>
+          </select>
         </div>
         <div class="persona-note" id="personaInfo"></div>
         <div class="persona-note" id="comboInfo" style="margin-top:4px;"></div>
@@ -427,22 +439,30 @@
         teen: {
           name: "13–15 ergen",
           combo: "Flick + Dab (+ bazen Slash)",
-          tip: "Hızlı, dağınık, enerjik. Aynı cümleyi önce Flick, sonra Dab, sonra istersen Slash ile dene."
+          tip: "Hızlı, dağınık, enerjik. Aynı cümleyi önce Flick, sonra Dab, sonra istersen Slash ile dene.",
+          placementHint: "Genelde normal; bazen hafif burundan deneyebilirsin. Gırtlaktan kaçın.",
+          defaultPlacement: "nasal"
         },
         adult: {
           name: "30–40 yetişkin",
           combo: "Glide + Press (+ gerektiğinde Punch)",
-          tip: "Kontrollü, ciddi, net. Glide ile nötr başla, Press ile baskı ekle, Punch ile sertleştir."
+          tip: "Kontrollü, ciddi, net. Glide ile nötr başla, Press ile baskı ekle, Punch ile sertleştir.",
+          placementHint: "Denge için çoğunlukla normal rezonans kullan. Burundan ve gırtlaktan aşırı kaçın.",
+          defaultPlacement: "normal"
         },
         middle: {
           name: "40–70 orta–ileri yaş",
           combo: "Glide + Wring",
-          tip: "Sakin ama içi dolu. Aynı cümleyi önce Glide, sonra Wring ile söyleyip duyguyu derinleştir."
+          tip: "Sakin ama içi dolu. Aynı cümleyi önce Glide, sonra Wring ile söyleyip duyguyu derinleştir.",
+          placementHint: "Normal rezonansa hafif gırtlaktan renk ekleyebilirsin. Burundan kaçın.",
+          defaultPlacement: "throat"
         },
         old: {
           name: "70+ çok yaşlı",
           combo: "Float + Wring",
-          tip: "Yavaş, kırılgan, nefesi çabuk tükenen. Float ile masalsı, Wring ile yorgun ve içe dönük bir ton dene."
+          tip: "Yavaş, kırılgan, nefesi çabuk tükenen. Float ile masalsı, Wring ile yorgun ve içe dönük bir ton dene.",
+          placementHint: "Normal + hafif gırtlaktan ve nefesli tını. Burun tınısını çok abartma.",
+          defaultPlacement: "throat"
         }
       };
 
@@ -462,6 +482,7 @@
       const personaInfo = document.getElementById("personaInfo");
       const comboInfo = document.getElementById("comboInfo");
       const backLink = document.getElementById("backToIndexLaban");
+      const placementSelect = document.getElementById("placementSelect");
 
       let currentIndex = 0;
 
@@ -580,7 +601,10 @@
         const p = personas[key];
         if (!p) return;
         personaInfo.textContent = p.name + " için önerilen kombin: " + p.combo + ".";
-        comboInfo.textContent = p.tip;
+        comboInfo.textContent = p.tip + " Ses yerleşimi önerisi: " + p.placementHint;
+        if (placementSelect && p.defaultPlacement) {
+          placementSelect.value = p.defaultPlacement;
+        }
       }
 
       personaSelect.addEventListener("change", function () {
@@ -591,6 +615,9 @@
         const key = personaSelect.value;
         const p = personas[key];
         if (!p) return;
+        if (placementSelect && p.defaultPlacement) {
+          placementSelect.value = p.defaultPlacement;
+        }
         const base = p.combo.split("+")[0] || "";
         const trimmed = base.trim().split(" ")[0].toLowerCase();
         const candidates = efforts.filter(function (e) {
