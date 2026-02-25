@@ -1,0 +1,182 @@
+Laban Effort Notları - Seslendirme İçin
+======================================
+
+Bu dosya, Laban Effort sistemini seslendirme çalışırken kullanman için hazırlandı.
+Amaç: Aynı cümleyi 8 farklı enerji/karakterle söyleyebilmek.
+
+1) 4 Temel Faktör
+------------------
+- Ağırlık (Weight)
+  - Light (Hafif): Yumuşak, nazik, kırılgan enerji.
+  - Strong (Güçlü): Baskılı, kararlı, sert enerji.
+
+- Zaman (Time)
+  - Sudden (Ani): Hızlı atak, keskin girişler.
+  - Sustained (Süreğen): Uzayan, yavaş açılan, uzun uzun konuşma.
+
+- Uzam / Yön (Space)
+  - Direct (Doğrudan): Hedefe kilitli, net, çizgi gibi.
+  - Indirect (Dolaylı): Dolaşan, kararsız, etrafta gezen odak.
+
+- Akış (Flow)
+  - Bound (Kontrollü): Kendini tutan, kasılı, kontrollü.
+  - Free (Serbest): Akıp giden, taşan, rahat.
+
+Ses İçin Çeviri:
+- Ağırlık: Hava basıncı, göğüs desteği, bastırma miktarı.
+- Zaman: Konuşma hızı, cümleye giriş ve bitiş.
+- Uzam: Dinleyiciye ne kadar “hedefli” konuştuğun.
+- Akış: Cümlelerin ne kadar kesik/akıcı olduğu, durak sayısı.
+
+2) 8 Temel Laban Effort ve Ses Karşılıkları
+-------------------------------------------
+
+1. Punch (Thrust)
+-----------------
+- Strong + Sudden + Direct (Flow genelde Bound)
+- Enerji: Sert, vurucu, saldırgan.
+- Ses Örneği:
+  - Kısa, net, vurgu yüksek.
+  - Komutan, sert patron, sinirli çıkışlar.
+
+2. Press
+--------
+- Strong + Sustained + Direct
+- Enerji: Baskılı, ağır, yoğun.
+- Ses Örneği:
+  - Kelimeleri bastıra bastıra, ağır, tehditkâr.
+  - “Seni uyarıyorum.” gibi cümlelerde işe yarar.
+
+3. Dab
+------
+- Light + Sudden + Direct
+- Enerji: Küçük, hızlı, net dokunuşlar.
+- Ses Örneği:
+  - Kısa, net, hızlı, hafif; titiz, aceleci ama nazik.
+  - Hızlı bilgi veren karakterler.
+
+4. Glide
+--------
+- Light + Sustained + Direct
+- Enerji: Yumuşak, kayar gibi, akıcı.
+- Ses Örneği:
+  - Sakin, nazik, akışkan; meditasyon, rehber, sevgi dolu anlatıcı.
+
+5. Flick
+--------
+- Light + Sudden + Indirect
+- Enerji: Hafif, savrulan, ani, dağınık.
+- Ses Örneği:
+  - Hızlı, yer yer savruk; hiperaktif genç, dalgın, hafif sinirli tonlar.
+
+6. Float
+--------
+- Light + Sustained + Indirect
+- Enerji: Rüyamsı, uçar, hayalperest.
+- Ses Örneği:
+  - Masalsı, uykulu, kafası başka yerde; masal anlatıcısı, sarhoş, çok yaşlı.
+
+7. Slash
+--------
+- Strong + Sudden + Indirect
+- Enerji: Geniş, savrulan, patlayıcı.
+- Ses Örneği:
+  - Ani yükselip alçalan, çılgın öfke, kontrolsüz bağırma.
+
+8. Wring
+--------
+- Strong + Sustained + Indirect
+- Enerji: Sıkışmış, bükülen, içe dönük.
+- Ses Örneği:
+  - İçten gelen, boğuk, ağlamaklı; dram sahneleri, bastırılmış acı.
+
+3) Laban Faktörlerini Seslendirme Tekniğine Çevirme
+---------------------------------------------------
+
+- Ağırlık:
+  - Light: Daha az hava, boyun ve omuzlar gevşek.
+  - Strong: Daha fazla diyafram desteği, göğüs rezonansı, hafif kasılı gövde.
+
+- Zaman:
+  - Sudden: Cümlelere keskin gir, sessiz harfleri net patlat (p, t, k, s).
+  - Sustained: Sesleri uzat, kelimeleri “çek”, cümleye yavaş gir.
+
+- Uzam:
+  - Direct: Dinleyicinin gözünün içine konuşuyormuşsun gibi; net hedef.
+  - Indirect: Sanki kendi kendine konuşuyor, dalgın düşünüyorsun gibi.
+
+- Akış:
+  - Bound: Cümle içinde minik duraklar, kendini tutan nefes.
+  - Free: Bağlaçlı, akıcı, duraksız, dökülen kelimeler.
+
+4) Pratik Cümle Egzersizi (8 Effort Turu)
+-----------------------------------------
+
+Örnek cümle:
+“Bu tekerlemeyi bugün üç kere okuyacağım.”
+
+Her effort için:
+- Punch:
+  - Sert, kısa, vurucu söyle.
+  - Vurgular: “BU tekerlemeyi BUGÜN ÜÇ kere OKUYACAĞIM.”
+
+- Press:
+  - Yavaş, baskılı, bastıra bastıra.
+  - Kelimeleri uzat, ağırlık ver.
+
+- Dab:
+  - Kısa parçalara böl: “Bu tekerlemeyi / bugün / üç kere / okuyacağım.”
+  - Hızlı ama hafif.
+
+- Glide:
+  - Cümleyi pürüzsüz, tek nefeste akıt.
+  - Sakin, nazik, dalgasız ton.
+
+- Flick:
+  - Ani, savruk vurgular; bazı kelimeleri fırlat.
+  - Hafif sinirli veya şakacı duygu.
+
+- Float:
+  - Rüyamsı, uykulu, hayalperest bir tonda, kelimeleri havada bırak.
+
+- Slash:
+  - Büyük, dalgalı, patlayıcı ton; ses yükselip alçalsın.
+
+- Wring:
+  - Boğuk, içe dönük, sanki ağlamamak için kendini tutuyormuşsun gibi.
+
+5) Laban Effort + Yaş ve Karakter Bağlantıları
+----------------------------------------------
+
+- 13–15 Ergen:
+  - Flick + Dab (+ bazen Slash)
+  - Hızlı, dağınık, enerjik, ani patlamalı konuşmalar.
+
+- 30–40 Yetişkin:
+  - Glide + Press (+ gerektiğinde Punch)
+  - Kontrollü, ciddi, net, sorumluluk sahibi tını.
+
+- 40–70 Orta–İleri Yaş:
+  - Glide + Wring
+  - Sakin ama içi dolu, deneyimli, duygusu daha derin.
+
+- 70+ Çok Yaşlı, Mecalsiz:
+  - Float + Wring
+  - Yavaş, kırılgan, nefesi çabuk tükenen, içe dönük.
+
+6) Günlük Mini Program Örneği
+-----------------------------
+
+1) Bir cümle veya tekerleme seç.
+2) Nötr sesinle 2 kez oku (kayıt).
+3) Aynı metni 8 effort’un hepsiyle sırayla oku (8 kayıt).
+4) Günün hedef yaş grubunu seç (örneğin ergen).
+5) O yaşa uygun 2–3 effort’u seç (ergen için Flick + Dab).
+6) Aynı metni bu karışımla 3–5 kez daha oku.
+7) Kaydı dinleyip şu soruları sor:
+   - Enerji gerçekten değişiyor mu?
+   - Hangi effort’ta sesim en rahat, hangisinde en zor?
+   - Bu enerji hangi tür karaktere benziyor?
+
+Bu dosyayı kullanarak hem karakter hem yaş hem de duygu çeşitliliğini sistemli biçimde artırabilirsin.
+

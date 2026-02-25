@@ -368,6 +368,7 @@
         <button id="goTwisterPage" class="secondary small">Tekerlemeler</button>
         <button id="goKalemPage" class="secondary small">Kalemli L</button>
         <button id="goRandomPage" class="secondary small">Random L</button>
+        <button id="goLabanPage" class="secondary small">Laban Effort</button>
       </div>
     </div>
 
@@ -567,6 +568,7 @@
     const goRandomPage = document.getElementById("goRandomPage");
     const goTwisterPage = document.getElementById("goTwisterPage");
     const goKalemPage = document.getElementById("goKalemPage");
+    const goLabanPage = document.getElementById("goLabanPage");
 
     const defaultThinWords = [
       "bela",
@@ -653,6 +655,12 @@
     if (goKalemPage) {
       goKalemPage.addEventListener("click", function () {
         window.location.href = "kalem-tekerleme-calisma.html";
+      });
+    }
+
+    if (goLabanPage) {
+      goLabanPage.addEventListener("click", function () {
+        window.location.href = "laban-effort.html";
       });
     }
 

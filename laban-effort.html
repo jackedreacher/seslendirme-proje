@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Laban Effort Stüdyosu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .app {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 12px 40px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 18px;
+      border: 1px solid #1e293b;
+      padding: 18px 16px 20px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+      margin-top: 20px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: #111827;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #9ca3af;
+    }
+    .label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(120deg,#f97316,#38bdf8);
+    }
+    .back-link {
+      font-size: 12px;
+      color: #9ca3af;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 10px 0 4px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 15px;
+      margin: 14px 0 6px;
+      color: #e5e7eb;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.45);
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background 0.1s ease-out;
+    }
+    button.secondary {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+      box-shadow: 0 6px 14px rgba(15,23,42,0.7);
+    }
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.7);
+    }
+    .sentence-card {
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      padding: 10px 11px 12px;
+      background: #020617;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .sentence-input {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 8px 9px;
+      font-size: 13px;
+      margin-top: 6px;
+      min-height: 52px;
+      resize: vertical;
+    }
+    .sentence-input:focus {
+      outline: 2px solid #1d4ed8;
+      outline-offset: 0;
+    }
+    .effort-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .effort-card {
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      padding: 8px 9px;
+      background: #020617;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.1s ease-out, background 0.1s ease-out, box-shadow 0.1s ease-out, transform 0.05s ease-out;
+    }
+    .effort-card-title {
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .effort-card-sub {
+      color: #9ca3af;
+      font-size: 11px;
+    }
+    .effort-card-active {
+      border-color: #22c55e;
+      background: radial-gradient(circle at top left, rgba(34,197,94,0.28), #020617);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.4);
+      transform: translateY(-1px);
+    }
+    .effort-detail {
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      padding: 10px 11px 12px;
+      background: #020617;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    .effort-detail-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .effort-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0 8px;
+      font-size: 11px;
+    }
+    .pill {
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #9ca3af;
+    }
+    .pill-strong {
+      border-color: #f97316;
+      color: #fed7aa;
+    }
+    .pill-light {
+      border-color: #22c55e;
+      color: #bbf7d0;
+    }
+    .pill-sudden {
+      border-color: #f97316;
+      color: #fed7aa;
+    }
+    .pill-sustained {
+      border-color: #38bdf8;
+      color: #bae6fd;
+    }
+    .pill-direct {
+      border-color: #6366f1;
+      color: #c7d2fe;
+    }
+    .pill-indirect {
+      border-color: #a855f7;
+      color: #e9d5ff;
+    }
+    .pill-bound {
+      border-color: #64748b;
+      color: #cbd5f5;
+    }
+    .pill-free {
+      border-color: #22c55e;
+      color: #bbf7d0;
+    }
+    .detail-text {
+      font-size: 13px;
+      color: #e5e7eb;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+    .detail-note {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .practice-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .select-small {
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+    .persona-note {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="header-row">
+        <div class="label">
+          <span class="label-dot"></span>
+          <span>Laban Effort stüdyosu</span>
+        </div>
+        <span id="backToIndexLaban" class="back-link">← Geri dön</span>
+      </div>
+      <h1>Enerji değiştirme egzersizleri</h1>
+      <p class="subtitle">Aynı cümleyi 8 farklı enerjiyle söyle. Yaş ve karaktere göre kombinler üret.</p>
+
+      <h2 class="section-title">1) Çalışma cümlen</h2>
+      <div class="sentence-card">
+        <div style="font-size:12px;color:#9ca3af;">Bu cümle tüm egzersizlerde kullanılacak.</div>
+        <textarea id="baseSentence" class="sentence-input">Bu tekerlemeyi bugün üç kere okuyacağım.</textarea>
+        <div class="practice-row">
+          <select id="sentenceSelect" class="select-small">
+            <option value="">Çalışma cümlesi seç</option>
+            <option disabled>–– Kalemli L tekerlemeleri ––</option>
+            <option value="kalin1">Kalın L – 1</option>
+            <option value="kalin2">Kalın L – 2</option>
+            <option value="kalin3">Kalın L – 3</option>
+            <option value="kalin4">Kalın L – 4</option>
+            <option value="kalin5">Kalın L – 5</option>
+            <option value="kalin6">Kalın L – 6</option>
+            <option value="ince1">İnce L – 1</option>
+            <option value="ince2">İnce L – 2</option>
+            <option value="ince3">İnce L – 3</option>
+            <option value="ince4">İnce L – 4</option>
+            <option value="ince5">İnce L – 5</option>
+            <option value="ince6">İnce L – 6</option>
+            <option value="karisik13">Karışık – 13</option>
+            <option value="karisik14">Karışık – 14</option>
+            <option value="karisik15">Karışık – 15</option>
+            <option value="karisik16">Karışık – 16</option>
+            <option value="karisik17">Karışık – 17</option>
+            <option value="karisik18">Karışık – 18</option>
+            <option value="zs19">Z/S – 19</option>
+            <option value="zs20">Z/S – 20</option>
+            <option value="zs21">Z/S – 21</option>
+            <option value="zs22">Z/S – 22</option>
+            <option disabled>–– Genel tekerlemeler ––</option>
+            <option value="gen1">Genel – 1</option>
+            <option value="gen2">Genel – 2</option>
+            <option value="gen3">Genel – 3</option>
+            <option value="gen4">Genel – 4</option>
+            <option value="gen5">Genel – 5</option>
+            <option value="gen6">Genel – 6</option>
+            <option value="gen7">Genel – 7</option>
+            <option value="gen8">Genel – 8</option>
+            <option value="gen9">Genel – 9</option>
+            <option value="gen10">Genel – 10</option>
+          </select>
+        </div>
+
+      <h2 class="section-title">2) Effort seç</h2>
+      <div class="effort-grid" id="effortGrid"></div>
+
+      <div class="effort-detail" id="effortDetail">
+        <div class="effort-detail-name" id="effortName"></div>
+        <div class="effort-pill-row" id="effortPills"></div>
+        <div class="detail-text" id="effortEnergy"></div>
+        <div class="detail-text" id="effortVoice"></div>
+        <div class="detail-note" id="effortHow"></div>
+      </div>
+
+      <div class="practice-row" style="margin-top:10px;">
+        <button id="prevEffort" class="secondary">Önceki effort</button>
+        <button id="nextEffort" class="secondary">Sonraki effort</button>
+        <button id="randomEffort">Rastgele effort</button>
+      </div>
+
+      <h2 class="section-title">3) Yaş ve karakter kombinleri</h2>
+      <div class="sentence-card">
+        <div class="practice-row">
+          <select id="personaSelect" class="select-small">
+            <option value="teen">13–15 ergen</option>
+            <option value="adult">30–40 yetişkin</option>
+            <option value="middle">40–70 orta–ileri yaş</option>
+            <option value="old">70+ çok yaşlı</option>
+          </select>
+          <button id="randomCombo" class="secondary">Bugün için kombin üret</button>
+        </div>
+        <div class="persona-note" id="personaInfo"></div>
+        <div class="persona-note" id="comboInfo" style="margin-top:4px;"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const efforts = [
+        {
+          id: "punch",
+          name: "Punch (Thrust)",
+          weight: "strong",
+          time: "sudden",
+          space: "direct",
+          flow: "bound",
+          energy: "Sert, vurucu, saldırgan. Komutan, sert patron, ani çıkış.",
+          voice: "Kısa, net, yüksek vurgulu. Sessiz harfleri sert söyle (p, t, k, s).",
+          how: "Cümleyi tek nefeste, keskin ataklarla söyle. Vurgular: “BU tekerlemeyi BUGÜN ÜÇ kere OKUYACAĞIM.”"
+        },
+        {
+          id: "press",
+          name: "Press",
+          weight: "strong",
+          time: "sustained",
+          space: "direct",
+          flow: "bound",
+          energy: "Baskılı, ağır, yoğun. Uyarı, tehdit, ciddi konuşma.",
+          voice: "Kelimeleri bastıra bastıra, yavaş ve kontrollü söyle.",
+          how: "Her kelimeyi biraz uzat. Göğüs desteğini artır, çeneyi fazla açmadan baskı kur."
+        },
+        {
+          id: "dab",
+          name: "Dab",
+          weight: "light",
+          time: "sudden",
+          space: "direct",
+          flow: "bound",
+          energy: "Küçük, hızlı, net dokunuşlar. Titiz, aceleci ama nazik.",
+          voice: "Kısa, net, hızlı ama hafif. Bilgi veren, iş bitirici ton.",
+          how: "Cümleyi küçük parçalara böl ve her parçayı hafifçe ‘dokunarak’ söyle."
+        },
+        {
+          id: "glide",
+          name: "Glide",
+          weight: "light",
+          time: "sustained",
+          space: "direct",
+          flow: "free",
+          energy: "Yumuşak, kayar gibi, akıcı. Meditasyon, rehber anlatıcı.",
+          voice: "Tek nefeste, pürüzsüz ve nazik akış. Sert köşelerden kaçın.",
+          how: "Cümleyi şarkı gibi bağla. Nefesi yönet, hecelerin köşelerini yuvarla."
+        },
+        {
+          id: "flick",
+          name: "Flick",
+          weight: "light",
+          time: "sudden",
+          space: "indirect",
+          flow: "free",
+          energy: "Hafif, savrulan, ani, dağınık. Hiperaktif genç, dalgın zihin.",
+          voice: "Hızlı, yer yer savruk. Bazı kelimeleri fırlatır gibi söyle.",
+          how: "Bazı kelimelerde ani yükselip geri çekil. Gözlerin etrafta geziyormuş gibi hayal et."
+        },
+        {
+          id: "float",
+          name: "Float",
+          weight: "light",
+          time: "sustained",
+          space: "indirect",
+          flow: "free",
+          energy: "Rüyamsı, uçar, hayalperest. Masal anlatıcısı, uykulu ton.",
+          voice: "Yumuşak, yavaş, hafif titreşimli. Son heceleri havaya bırak.",
+          how: "Sanki yatağın içinden konuşuyormuşsun gibi söyle. Bakışın uzak bir noktada olsun."
+        },
+        {
+          id: "slash",
+          name: "Slash",
+          weight: "strong",
+          time: "sudden",
+          space: "indirect",
+          flow: "free",
+          energy: "Geniş, savrulan, patlayıcı. Çılgın öfke, kontrolsüz yükselmeler.",
+          voice: "Ani yükselip alçalan, büyük jestlerle eşleşen ses.",
+          how: "Sesini dalga gibi yükseltip indir. Ellerinle geniş jestler yaparak oku."
+        },
+        {
+          id: "wring",
+          name: "Wring",
+          weight: "strong",
+          time: "sustained",
+          space: "indirect",
+          flow: "bound",
+          energy: "Sıkışmış, bükülen, içe dönük. Bastırılmış acı, dramatik ton.",
+          voice: "Boğaz hafif sıkışık, içten gelen, ağlamaklı tını.",
+          how: "Cümleyi sanki ağlamamak için kendini tutuyormuşsun gibi söyle. Nefesi içeride tut."
+        }
+      ];
+
+      const personas = {
+        teen: {
+          name: "13–15 ergen",
+          combo: "Flick + Dab (+ bazen Slash)",
+          tip: "Hızlı, dağınık, enerjik. Aynı cümleyi önce Flick, sonra Dab, sonra istersen Slash ile dene."
+        },
+        adult: {
+          name: "30–40 yetişkin",
+          combo: "Glide + Press (+ gerektiğinde Punch)",
+          tip: "Kontrollü, ciddi, net. Glide ile nötr başla, Press ile baskı ekle, Punch ile sertleştir."
+        },
+        middle: {
+          name: "40–70 orta–ileri yaş",
+          combo: "Glide + Wring",
+          tip: "Sakin ama içi dolu. Aynı cümleyi önce Glide, sonra Wring ile söyleyip duyguyu derinleştir."
+        },
+        old: {
+          name: "70+ çok yaşlı",
+          combo: "Float + Wring",
+          tip: "Yavaş, kırılgan, nefesi çabuk tükenen. Float ile masalsı, Wring ile yorgun ve içe dönük bir ton dene."
+        }
+      };
+
+      const baseSentenceInput = document.getElementById("baseSentence");
+      const sentenceSelect = document.getElementById("sentenceSelect");
+      const effortGrid = document.getElementById("effortGrid");
+      const effortName = document.getElementById("effortName");
+      const effortPills = document.getElementById("effortPills");
+      const effortEnergy = document.getElementById("effortEnergy");
+      const effortVoice = document.getElementById("effortVoice");
+      const effortHow = document.getElementById("effortHow");
+      const prevEffort = document.getElementById("prevEffort");
+      const nextEffort = document.getElementById("nextEffort");
+      const randomEffort = document.getElementById("randomEffort");
+      const personaSelect = document.getElementById("personaSelect");
+      const randomCombo = document.getElementById("randomCombo");
+      const personaInfo = document.getElementById("personaInfo");
+      const comboInfo = document.getElementById("comboInfo");
+      const backLink = document.getElementById("backToIndexLaban");
+
+      let currentIndex = 0;
+
+      const sentenceSamples = {
+        kalin1: "Baltalı kolağası lalapaşanın halılarına halasının bol pantolonlu palabıyıklı balcıbaşısına Balgat'la Bağdat'ta palan döktürdü.",
+        kalin2: "Alan alır kalan kalır daralan bollaşır.",
+        kalin3: "Yalancı yalama dolambaçı yollardan darala darala Allah Allah diyerek kalabalık alana daldı.",
+        kalin4: "Falancanın halası onikiye on kala börekle balla taçlı haçlının ve dahi yalancı dolandırıcının allı pullu karanlığına baltayla dalmış.",
+        kalin5: "Folluk Allah'tan dolu da dolu dolu dolamacının bol bol Bolu'lu kalabalık ağzından dolandırıcının sesi \"fol yok yol yok\" demedi.",
+        kalin6: "Aralık doğumlu kolcunun falafel baltalayan Oflu ablası çok ağladı.",
+        ince1: "Lay lay lom lay lay lom.",
+        ince2: "Lord layık olduğunca eyyamcı Lale'nin Leyla'nın labadasını lamba ışığında yemesini istemedi.",
+        ince3: "Alaaddin Lamba'nın Cini'ne lambada mısın yoksa balistikçi palyaçonun yanında mısın dedi.",
+        ince4: "Lafazan Lale Laleli'de laleci Leyla'yla laf ederken Laleli'nin laleleri lay lay diyerek Lafazan Lale'nin yarine gittiler.",
+        ince5: "Lale ela gözleri bela Leyla kadar meyyaldi aşk-ı belaya lakin Leyla ela ela bakınca Lale sümbül layığınca kelam edemedi Kemal'in gülcemaline.",
+        ince6: "Labada lordu Letafet Bey şikayet eder Leydi Lafayet'ten lakin lahmacun lemur için bela leblebiler lafebesi laylaylom ederken lağımcıya iletilmiştir.",
+        karisik13: "Belalı kalafatçı Kalafatı lamba yarıcılara çekti.",
+        karisik14: "Dolandırıcının yalan dolu bakışları hâlâ laflamakta olan halayıkla lord'da idi.",
+        karisik15: "Lağımcı Züleyha'ya zalim dedi ama layık olduğu gibi palabıyıklı palalı belalı palacıbaşılardan lafla lambalamanın mümkün olmadığını anladı.",
+        karisik16: "Lale baloncu Kalın Mustafa'yla beraber hâlâ halasının halılarını yolcu lambalarına asıyor.",
+        karisik17: "Labadalar altın elmaların altında kalırsa laflamaya meyyal eyyamcı balta ağlar.",
+        karisik18: "Bolayır'ı Latife falancanın kalburunda, lakin filancanın dolmaları Latife'yi bağladı.",
+        zs19: "Şu köşe yaz köşesi şu köşe kış köşesi şu köşe güz köşesi ortada su şişesi.",
+        zs20: "Sersemsepelek susamcı, sinesinde sektirdiği silahtar semizin sakızlı sakalından sabah sağanlığında sabahlıkla duran sahavet sahibi sacide kadar sahiden sahteleşemez.",
+        zs21: "Zürafa zembereği zencefilli zehrin zerkedilişi zemininde ziyan zebil olunca, zebellah gibi zamane cüceleri zemzem zamanında zuhur etti.",
+        zs22: "Üç tunç tas has kayısı hoşafı.",
+        gen1: "Kahtalı hala hala halkın halaskargazi lambalarını, kat kat kagir kalıplı kabakkemane kağıtlarından kalabalık yardımcılarına dağıtır.",
+        gen2: "Babasının benekli bıldırcını bitişik bostanda böceklerden bunalarak büzüldü.",
+        gen3: "Al bu takatukaları takatukacıya takatukalatmaya götür, takatukacı takatukaları takatukalamam derse takatukaları takatukacıdan takatukalatmadan al da gel.",
+        gen4: "Kırk kartal kırkının da kanadı kırık kara kartal, kırk kanadı kırık kara kartal konar dal sarkar, kırk kanadı kırık kara kartal kalkar dal kalkar.",
+        gen5: "Kedi kendikendinin kadim kenevirlerini tencereye devşirip pencerye seyirtti.",
+        gen6: "Cenevizli cavlak cayırcayır cayırdarken, camcının canı alınası cancalakları camdan contayı canavarlaştırıyorlardı.",
+        gen7: "jamboncu jale jelibonları objektif zeynaya jileli jölelerle jiletleyip verdi.",
+        gen8: "A be kuru dayı ne kuru sarı darı bu darı a be kuru dayı?",
+        gen9: "Bir berber bir berbere bre berber birader gel beraber bir berber dükkanı açalım demiş.",
+        gen10: "Gelin gülin görümcesinin örümceğini gönüllü gülizin gönlündeyken görüp götürdü."
+      };
+
+      function createPill(text, cls) {
+        const span = document.createElement("span");
+        span.className = "pill " + cls;
+        span.textContent = text;
+        return span;
+      }
+
+      function renderDetail() {
+        const e = efforts[currentIndex];
+        effortName.textContent = e.name;
+        effortPills.innerHTML = "";
+        effortPills.appendChild(createPill(e.weight === "strong" ? "Weight: Strong" : "Weight: Light", e.weight === "strong" ? "pill-strong" : "pill-light"));
+        effortPills.appendChild(createPill(e.time === "sudden" ? "Time: Sudden" : "Time: Sustained", e.time === "sudden" ? "pill-sudden" : "pill-sustained"));
+        effortPills.appendChild(createPill(e.space === "direct" ? "Space: Direct" : "Space: Indirect", e.space === "direct" ? "pill-direct" : "pill-indirect"));
+        effortPills.appendChild(createPill(e.flow === "bound" ? "Flow: Bound" : "Flow: Free", e.flow === "bound" ? "pill-bound" : "pill-free"));
+        effortEnergy.textContent = e.energy;
+        const sentence = baseSentenceInput.value || "Bu tekerlemeyi bugün üç kere okuyacağım.";
+        effortVoice.textContent = "Ses ayarı: " + e.voice;
+        effortHow.textContent = "Alıştırma: Seçtiğin cümleyi (“" + sentence + "”) bu effort’la 3 kez art arda oku. Her tekrarda enerjiyi biraz daha abart.";
+        Array.prototype.forEach.call(effortGrid.children, function (card, i) {
+          if (i === currentIndex) {
+            card.classList.add("effort-card-active");
+          } else {
+            card.classList.remove("effort-card-active");
+          }
+        });
+      }
+
+      efforts.forEach(function (e, index) {
+        const card = document.createElement("div");
+        card.className = "effort-card";
+        const title = document.createElement("div");
+        title.className = "effort-card-title";
+        title.textContent = e.name;
+        const sub = document.createElement("div");
+        sub.className = "effort-card-sub";
+        sub.textContent = e.energy;
+        card.appendChild(title);
+        card.appendChild(sub);
+        card.addEventListener("click", function () {
+          currentIndex = index;
+          renderDetail();
+        });
+        effortGrid.appendChild(card);
+      });
+
+      prevEffort.addEventListener("click", function () {
+        currentIndex = (currentIndex - 1 + efforts.length) % efforts.length;
+        renderDetail();
+      });
+
+      nextEffort.addEventListener("click", function () {
+        currentIndex = (currentIndex + 1) % efforts.length;
+        renderDetail();
+      });
+
+      randomEffort.addEventListener("click", function () {
+        currentIndex = Math.floor(Math.random() * efforts.length);
+        renderDetail();
+      });
+
+      baseSentenceInput.addEventListener("input", function () {
+        renderDetail();
+      });
+
+      if (sentenceSelect) {
+        sentenceSelect.addEventListener("change", function () {
+          const key = sentenceSelect.value;
+          if (key && sentenceSamples[key]) {
+            baseSentenceInput.value = sentenceSamples[key];
+            renderDetail();
+          }
+        });
+      }
+
+      function renderPersonaInfo() {
+        const key = personaSelect.value;
+        const p = personas[key];
+        if (!p) return;
+        personaInfo.textContent = p.name + " için önerilen kombin: " + p.combo + ".";
+        comboInfo.textContent = p.tip;
+      }
+
+      personaSelect.addEventListener("change", function () {
+        renderPersonaInfo();
+      });
+
+      randomCombo.addEventListener("click", function () {
+        const key = personaSelect.value;
+        const p = personas[key];
+        if (!p) return;
+        const base = p.combo.split("+")[0] || "";
+        const trimmed = base.trim().split(" ")[0].toLowerCase();
+        const candidates = efforts.filter(function (e) {
+          return e.name.toLowerCase().indexOf(trimmed) !== -1;
+        });
+        const chosen = candidates.length ? candidates[Math.floor(Math.random() * candidates.length)] : efforts[Math.floor(Math.random() * efforts.length)];
+        currentIndex = efforts.indexOf(chosen);
+        renderDetail();
+      });
+
+      if (backLink) {
+        backLink.addEventListener("click", function () {
+          window.location.href = "index.html";
+        });
+      }
+
+      renderPersonaInfo();
+      renderDetail();
+    })();
+  </script>
+</body>
+</html>
