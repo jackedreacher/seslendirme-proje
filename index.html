@@ -369,6 +369,7 @@
         <button id="goKalemPage" class="secondary small">Kalemli L</button>
         <button id="goRandomPage" class="secondary small">Random L</button>
         <button id="goLabanPage" class="secondary small">Laban Effort</button>
+        <button id="goDiksiyonPage" class="secondary small">Diksiyon</button>
       </div>
     </div>
 
@@ -569,6 +570,7 @@
     const goTwisterPage = document.getElementById("goTwisterPage");
     const goKalemPage = document.getElementById("goKalemPage");
     const goLabanPage = document.getElementById("goLabanPage");
+    const goDiksiyonPage = document.getElementById("goDiksiyonPage");
 
     const defaultThinWords = [
       "bela",
@@ -661,6 +663,12 @@
     if (goLabanPage) {
       goLabanPage.addEventListener("click", function () {
         window.location.href = "laban-effort.html";
+      });
+    }
+
+    if (goDiksiyonPage) {
+      goDiksiyonPage.addEventListener("click", function () {
+        window.location.href = "diksiyon-analiz.html";
       });
     }
 

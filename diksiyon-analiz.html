@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Diksiyon Analizi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .app {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 12px 40px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 18px;
+      border: 1px solid #1e293b;
+      padding: 18px 16px 20px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.9);
+      margin-top: 20px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: #111827;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #9ca3af;
+    }
+    .label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(120deg,#f97316,#38bdf8);
+    }
+    .back-link {
+      font-size: 12px;
+      color: #9ca3af;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 10px 0 4px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 10px 11px;
+      font-size: 13px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    textarea:focus {
+      outline: 2px solid #1d4ed8;
+      outline-offset: 0;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.45);
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background 0.1s ease-out;
+    }
+    button.secondary {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+      box-shadow: 0 6px 14px rgba(15,23,42,0.7);
+    }
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.7);
+    }
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+    .result-box {
+      margin-top: 14px;
+      padding: 10px 11px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .word {
+      padding: 1px 2px;
+      border-radius: 4px;
+      cursor: default;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .word-main {
+      line-height: 1.2;
+    }
+    .word-bubble {
+      margin-top: 1px;
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 999px;
+      background: #0f172a;
+      border: 1px solid #1f2937;
+      color: #e5e7eb;
+      white-space: nowrap;
+    }
+    .rule-ulama {
+      border-bottom: 1px dashed #38bdf8;
+    }
+    .rule-soft {
+      background: rgba(56,189,248,0.16);
+      border-bottom: 1px solid rgba(56,189,248,0.5);
+    }
+    .rule-drop {
+      background: rgba(244,114,182,0.16);
+      border-bottom: 1px solid rgba(244,114,182,0.5);
+    }
+    .rule-daralma-good {
+      background: rgba(34,197,94,0.18);
+      border-bottom: 1px solid rgba(34,197,94,0.6);
+    }
+    .rule-daralma-watch {
+      background: rgba(234,179,8,0.18);
+      border-bottom: 1px solid rgba(234,179,8,0.6);
+    }
+    .legend {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #9ca3af;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .legend-swatch {
+      width: 14px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+    }
+    .swatch-ulama {
+      border-bottom: 1px dashed #38bdf8;
+    }
+    .swatch-soft {
+      background: rgba(56,189,248,0.16);
+      border-bottom: 1px solid rgba(56,189,248,0.5);
+    }
+    .swatch-drop {
+      background: rgba(244,114,182,0.16);
+      border-bottom: 1px solid rgba(244,114,182,0.5);
+    }
+    .swatch-good {
+      background: rgba(34,197,94,0.18);
+      border-bottom: 1px solid rgba(34,197,94,0.6);
+    }
+    .swatch-watch {
+      background: rgba(234,179,8,0.18);
+      border-bottom: 1px solid rgba(234,179,8,0.6);
+    }
+    .notes {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    @media (min-width: 768px) {
+      .app {
+        max-width: 960px;
+        padding: 24px 20px 64px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="header-row">
+        <div class="label">
+          <span class="label-dot"></span>
+          <span>Diksiyon analizi</span>
+        </div>
+        <span id="backToIndexDiksiyon" class="back-link">← Geri dön</span>
+      </div>
+      <h1>Türkçe diksiyon kurallarıyla metin analizi</h1>
+      <p class="subtitle">Kayıttan çözdüğün metni yapıştır, ulama ve temel diksiyon noktalarını metin üzerinde gör.</p>
+
+      <textarea id="dText" placeholder="Kayıttan çözdüğün metni buraya yaz veya yapıştır."></textarea>
+
+      <div class="input-row">
+        <button id="analyzeBtn">Analiz et</button>
+        <button id="clearBtn" class="secondary">Temizle</button>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-swatch swatch-ulama"></span>
+          <span>Ulama yapılabilecek yer</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch swatch-soft"></span>
+          <span>Ünsüz yumuşaması örneği (kitabı, ağacı...)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch swatch-drop"></span>
+          <span>Ses düşmesi örneği (ağzı, burnu...)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch swatch-good"></span>
+          <span>Doğru sabit daralma (diyor, yiyor...)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-swatch swatch-watch"></span>
+          <span>Daralma / vurguda dikkat (gelecek, yapacak...)</span>
+        </div>
+      </div>
+
+      <div class="notes">
+        Not: Bu araç ses dosyasını otomatik yazıya çevirmiyor. Önce kaydı bir yerde çözüp metni buraya yapıştır, sonra kural noktalarını metin üzerinde gör.
+        <br><br>
+        <strong>Ulama nedir?</strong> Bir kelime sessiz harfle bitip sonraki kelime sesliyle başlıyorsa, konuşurken bu iki kelimeyi hafifçe birbirine bağlamaya ulama denir. Örn: “çok önemli” → “ço-könemli”ye doğru akar, ama kelimeler yine anlaşılır kalır.
+        <br><br>
+        <strong>Ünlü daralması nedir?</strong> Geniş ünlülerin (a, e) i, ı, u, ü’ye doğru kaymasıdır. Yazımda sabit örnekler: “demek → diyor”, “yemek → yiyor”. Nötr diksiyonda “gelecek, yapacak” gibi kelimeler daraltılmadan, yazıldığı gibi okunmalıdır; karakter tercihiyle “gelicek” gibi formlar bilinçli olarak seçilebilir.
+        <br><br>
+        <strong>Ünsüz yumuşaması nedir?</strong> Kelime sonundaki sert ünsüzler (p, ç, t, k) ünlüyle başlayan ek aldığında b, c, d, ğ’ye yumuşar. Örn: “kitap + ı → kitabı”, “ağaç + ı → ağacı”. Okurken bu yumuşamayı duyulur hâle getirmek gerekir.
+        <br><br>
+        <strong>Ses düşmesi nedir?</strong> Bazı kelimeler ek aldığında içlerindeki bir ünlü düşer ve bu şekilde sabitlenmiştir. Örn: “ağız → ağzı”, “burun → burnu”. Okurken yazıldığı hâliyle ama hece yapısını fark ederek söylemek önemlidir (ağ-zı, bur-nu gibi).
+       
+      </div>
+
+      <div class="result-box" id="dResult"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const textEl = document.getElementById("dText");
+      const resultEl = document.getElementById("dResult");
+      const analyzeBtn = document.getElementById("analyzeBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const backLink = document.getElementById("backToIndexDiksiyon");
+
+      const softSet = new Set(["kitabı", "ağacı", "kanadı", "çocuğu", "rengi"]);
+      const dropSet = new Set(["ağzı", "burnu", "aklı", "gönlü", "oğlu", "karnı"]);
+      const darGoodSet = new Set(["diyor", "diyorum", "diyorsun", "yiyor", "yiyorum", "yiyorsun"]);
+      const darWatchSet = new Set(["gelecek", "gidecek", "yapacak", "geleceğim", "yapacağım"]);
+
+      const vowels = "aeıioöuüAEIİOÖUÜ";
+      const consonants = "bcçdfgğhjklmnprsştvyzqxwBCÇDFGĞHJKLMNPRSŞTVYZQXW";
+
+      function stripPunc(token) {
+        return token.replace(/^[^\p{L}\p{N}]+/u, "").replace(/[^\p{L}\p{N}]+$/u, "");
+      }
+
+      function analyzeText(raw) {
+        if (!raw.trim()) {
+          resultEl.textContent = "";
+          return;
+        }
+        const tokens = raw.split(/(\s+)/);
+        let html = "";
+        for (let i = 0; i < tokens.length; i++) {
+          const t = tokens[i];
+          if (!t.trim() || /\s+/.test(t)) {
+            html += t;
+            continue;
+          }
+          const core = stripPunc(t);
+          const lower = core.toLowerCase();
+          const classes = [];
+          let titleParts = [];
+          let labelParts = [];
+
+          if (softSet.has(lower)) {
+            classes.push("rule-soft");
+            titleParts.push("Ünsüz yumuşaması örneği (p-ç-t-k → b-c-d-ğ): " + core);
+            labelParts.push("yumuşama");
+          }
+          if (dropSet.has(lower)) {
+            classes.push("rule-drop");
+            titleParts.push("Ses düşmesi örneği (ağız→ağzı, burun→burnu vb.): " + core);
+            labelParts.push("ses düşmesi");
+          }
+          if (darGoodSet.has(lower)) {
+            classes.push("rule-daralma-good");
+            titleParts.push("Sabit daralma: " + core + " (de-yor/ye-yor tipi).");
+            labelParts.push("daralma doğru");
+          }
+          if (darWatchSet.has(lower)) {
+            classes.push("rule-daralma-watch");
+            titleParts.push("Ünlü daralması / vurguda dikkat: " + core + " (gelecek, yapacak...).");
+            labelParts.push("daralma dikkat");
+          }
+
+          let ulama = false;
+          if (i + 2 < tokens.length) {
+            const nextWordToken = tokens[i + 2];
+            if (nextWordToken && !/\s+/.test(nextWordToken)) {
+              const coreNext = stripPunc(nextWordToken);
+              const prevChar = core.slice(-1);
+              const nextChar = coreNext[0];
+              if (prevChar && nextChar && consonants.includes(prevChar) && vowels.includes(nextChar)) {
+                ulama = true;
+              }
+            }
+          }
+          if (ulama) {
+            classes.push("rule-ulama");
+            titleParts.push("Ulama: bu kelimeyi sonraki sesli başlayan kelimeyle bağlayarak okuyabilirsin.");
+            labelParts.push("ulama");
+          }
+
+          if (classes.length === 0) {
+            html += t;
+          } else {
+            const before = t.match(/^[^\p{L}\p{N}]+/u)?.[0] || "";
+            const after = t.match(/[^\p{L}\p{N}]+$/u)?.[0] || "";
+            const bubble = labelParts.length ? "<span class=\"word-bubble\">" + labelParts.join(" + ") + "</span>" : "";
+            const span =
+              "<span class=\"word " +
+              classes.join(" ") +
+              "\" title=\"" +
+              titleParts.join(" ") +
+              "\"><span class=\"word-main\">" +
+              core +
+              "</span>" +
+              bubble +
+              "</span>";
+            html += before + span + after;
+          }
+        }
+        resultEl.innerHTML = html;
+      }
+
+      analyzeBtn.addEventListener("click", function () {
+        analyzeText(textEl.value || "");
+      });
+
+      clearBtn.addEventListener("click", function () {
+        textEl.value = "";
+        resultEl.textContent = "";
+      });
+
+      if (backLink) {
+        backLink.addEventListener("click", function () {
+          window.location.href = "index.html";
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

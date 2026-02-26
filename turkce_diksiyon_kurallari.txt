@@ -1,0 +1,162 @@
+Türkçe Diksiyon Kuralları - Seslendirme İçin Özet Notlar
+=======================================================
+
+Bu dosya, Türkçe okuma yaparken kulağını ve ağzını temiz tutman için hazırlandı.
+Özellikle ince/kalın L, ulama, ünsüz yumuşaması, ses düşmesi ve ünlü daralmasına odaklanır.
+
+1) İnce / Kalın L
+-----------------
+
+Kural:
+- e, i, ö, ü ile: L çoğunlukla İNCE çıkar.
+- a, ı, o, u ile: L çoğunlukla KALIN çıkar.
+
+Örnekler:
+- İnce L:
+  - el, bilek, kilit, göl, gül, millet
+- Kalın L:
+  - bal, yol, kul, kalp, sal, yalvarmak
+
+Pratik:
+- Önce ince L listesini tek nefeste oku, sonra kalın L listesini:
+  - “el, bilek, kilit, göl, gül, millet”
+  - “bal, yol, kul, kalp, sal, yalvarmak”
+- İnce L’lerde dil daha önde ve parlak, kalın L’lerde dil daha geride ve koyu hissedilmelidir.
+
+
+2) Ulama (Kelime Bağlama)
+-------------------------
+
+Kural (okuma için):
+- Bir kelime sessiz harfle bitip sonraki kelime sesli harfle başlıyorsa,
+  seslendirmede bu iki kelimeyi akıcı bağlamak doğaldır.
+
+Örnekler:
+- “çok önemli” → “ço-könemli”ye yakın akar.
+- “bir adam” → “bi-radam” gibi duyulur.
+- “git artık” → “gi-tartık” gibi akar.
+
+Dikkat:
+- Ulama yaparken kelimeyi YUTMA:
+  - “bir adam” → “birdam” olmasın.
+- Anlam karışıklığı yaratacak kadar birleştirme yapma.
+
+Pratik:
+- 2–3 kelimelik zincirler seç:
+  - “çok önemli, bir adam, git artık, bu ev, o insan”
+- Önce kelime kelime ayırarak oku, sonra ulamayla akıcı oku.
+- Kaydedip farkı dinle: Kopuk mu, yoksa aşırı yapışıp anlaşılmaz mı?
+
+
+3) Ünsüz Yumuşaması
+-------------------
+
+Kural:
+- Türkçede kelime sonundaki bazı sert ünsüzler (p, ç, t, k),
+  ünlü ile başlayan ek aldıklarında yumuşar:
+  - p → b
+  - ç → c
+  - t → d
+  - k → ğ / g
+
+Örnekler:
+- kitap + ı → kitabı (kiTAPı değil, kiTA-BI)
+- ağaç + ı → ağacı
+- kanat + ı → kanadı
+- çocuk + u → çocuğu
+- renk + i → rengi
+
+Okumada:
+- “kitapı” değil “kitabı”
+- “çocukda” değil “çocukta” (burada d değil, zaten t + ta ekinden bahsedilir)
+- “çocuku” değil “çocuğu”
+
+Pratik:
+- Metinde sonu p, ç, t, k ile biten ve ek almış kelimeleri bul.
+- Onları yavaşça, ek kısmını abartarak doğru şekilde oku:
+  - “kitabı, ağacı, kanadı, çocuğu, rengi”
+
+
+4) Ses Düşmesi
+--------------
+
+Ses düşmesi = bir kelimedeki bir seslinin, ek alırken ya da hızlı konuşurken kaybolması.
+
+Yazım açısından:
+- Bazı kelimelerin resmi yazımı zaten ses düşmesi ile sabitlenmiştir:
+  - “ne + i” → “neyi”
+  - “ağız + ı” → “ağzı”
+  - “burun + u” → “burnu”
+
+Günlük konuşma açısından:
+- Hızlı konuşurken:
+  - “gidelim” → “gidelim” (değişmeyebilir)
+  - “ne oluyor” → “noluyor” (ağızda bozulur ama bu yazım değildir)
+
+Seslendirmede:
+- Metin sana ne yazdıysa, onu temel al:
+  - “burnu” yazıyorsa “bur-nu” değil “bur-nu” (yazıldığı gibi ama akıcı),
+    kelimenin zaten kısalmış hâlini kullanırsın.
+- “ne oluyor” yazıyorsa, genelde “ne oluyor” şeklinde daha temiz okunur;
+  “noluyor” ancak karakter gerektiriyorsa seçilir.
+
+Pratik:
+- Ses düşmesi olan kelimeler için mini liste:
+  - “ağzı, burnu, aklı, gönlü, oğlu, karnı”
+- Her birini heceleyerek oku:
+  - “ağ-zı, bur-nu, ak-lı, gön-lü, oğ-lu, kar-nı”
+
+
+5) Ünlü Daralması
+-----------------
+
+Ünlü daralması = geniş ünlülerin (a, e) bazen i, ı, u, ü’ye doğru kayması.
+
+Yazımda sabitleşmiş örnek:
+- “demek” → “di-yor” (de-y-yor değil)
+  - “o diyor, ben diyorum, sen diyorsun”
+- “yemek” → “yi-yor” (ye-y-yor değil)
+  - “yiyor, yiyorum, yiyorsun”
+
+Konuşma dilindeki daralma (yazıdan sapma):
+- “gelecek” → “gelicek / gelcek”
+- “gidecek” → “gidicek / gidcek”
+- “yapacak” → “yapıcak / yapcak”
+
+Diksiyon açısından kural:
+- Yazımla sabitlenmiş daralma:
+  - “diyor, diyorum, diyorlar, yiyor, yiyorsun” → böyle okunmalı.
+- Günlük konuşma daralması:
+  - “gelecek” → “gelicek / gelcek” doğal ağız olabilir ama
+    nötr, düzgün Türkçe’de **gelecek** diye okunmalı.
+
+Pratik:
+- Liste:
+  - “diyor, diyorum, diyorsun, yiyor, yiyorum, yiyorsun”
+  - “gelecek, gidecek, yapacak, geleceğim, yapacağım”
+- İlk satırı yazıldığı gibi ama akıcı oku.
+- İkinci satırı önce düzgün Türkçe ile oku:
+  - ge-le-cek, gi-de-cek, ya-pa-cak, ge-le-ce-ğim, ya-pa-ca-ğım
+- Sonra karakter çalışması için istersen:
+  - “gelicek, gidicek, yapıcak, gelcem, yapıcam” gibi, bilinçli bozulmuş formları dene.
+
+
+6) Bu Kuralları Uygulamak İçin Günlük Mini Egzersiz
+---------------------------------------------------
+
+Her gün:
+1) İnce / kalın L listelerini bir kez oku.
+2) Ulama cümlelerini:
+   - “çok önemli, bir adam, git artık, bu ev, o insan”
+   önce ayrı, sonra ulamalı olarak oku.
+3) Ünsüz yumuşaması için:
+   - “kitabı, ağacı, kanadı, çocuğu, rengi” kelimelerini 3’er kez tekrarla.
+4) Ses düşmesi ve ünlü daralması için:
+   - “ağzı, burnu, aklı, gönlü, oğlu, karnı”
+   - “diyor, diyorum, diyorsun, yiyor, yiyorum, yiyorsun”
+   - “gelecek, gidecek, yapacak, geleceğim, yapacağım”
+   kelimelerini yavaş ve net söyle, sonra normal hızda tekrarla.
+
+Bu dosyayı, seslendirme çalışmadan önce hızlıca gözden geçirip
+mini bir “diksiyon ısınma rehberi” gibi kullanabilirsin.
+
